@@ -21,7 +21,6 @@ class AppRouter {
         );
 
       case Routes.editProfile:
-      case '/editProfile':
         final args = settings.arguments;
         final ProfileModel? profileModel = args is ProfileModel ? args : null;
 
