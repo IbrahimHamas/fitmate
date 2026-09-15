@@ -1,5 +1,6 @@
 import 'package:fit_up/core/routing/routes.dart';
 import 'package:fit_up/core/themes/app_color.dart';
+import 'package:fit_up/features/profile/data/models/profile_model.dart';
 import 'package:fit_up/features/profile/presentation/view_model/profile_cubit.dart';
 import 'package:fit_up/features/profile/presentation/view_model/profile_state.dart';
 import 'package:fit_up/features/profile/presentation/widgets/profile_header.dart';
@@ -58,8 +59,7 @@ class ProfileScreen extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        // استخراج بيانات الـ profile لو مجمعة في الـ State
-        final dynamic currentProfile = (state is ProfileSuccess)
+        final ProfileModel? currentProfile = (state is ProfileSuccess)
             ? state.profile
             : null;
 
@@ -75,9 +75,12 @@ class ProfileScreen extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
+                // ممررين الصورة والبيانات للـ Header
                 ProfileHeader(
-                  name: currentProfile?.name ?? '',
+                  name: currentProfile?.fullName ?? '',
                   email: currentProfile?.email ?? '',
+                  imageUrl:
+                      currentProfile?.profileImage, // لو الموديل فيه imageUrl
                   onEdit: () {
                     Navigator.pushNamed(
                       context,
@@ -87,19 +90,31 @@ class ProfileScreen extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 24),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ProfileStatCard(title: 'Workouts', value: '12', label: ''),
-                    ProfileStatCard(
-                      title: 'Calories',
-                      value: '1,450',
-                      label: '',
+                    Expanded(
+                      child: ProfileStatCard(
+                        title: 'Workouts',
+                        value: '${currentProfile?.plansCompleted ?? 12}',
+                        label: '',
+                      ),
                     ),
-                    ProfileStatCard(
-                      title: 'Time (hrs)',
-                      value: '8.5',
-                      label: '',
+                    const SizedBox(width: 8),
+                    const Expanded(
+                      child: ProfileStatCard(
+                        title: 'Calories',
+                        value: '1,450',
+                        label: '',
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: ProfileStatCard(
+                        title: 'Time (hrs)',
+                        value: '${currentProfile?.workoutHours ?? 8.5}',
+                        label: '',
+                      ),
                     ),
                   ],
                 ),
@@ -108,7 +123,6 @@ class ProfileScreen extends StatelessWidget {
                   icon: Icons.person_outline,
                   title: 'Edit Profile',
                   onTap: () {
-                    // إرسال كائن البيانات للـ EditProfileScreen لمنع الإيرور
                     Navigator.pushNamed(
                       context,
                       Routes.editProfile,

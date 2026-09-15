@@ -39,8 +39,8 @@ class ProfileModel {
       email: json['email'] ?? '',
       phoneNumber: json['phone_number'] ?? '',
       profileImage: json['profile_image'],
-      plansCompleted: json['plans_completed'] ?? 0,
-      workoutHours: json['workout_hours'] ?? 0,
+      plansCompleted: (json['plans_completed'] as num?)?.toInt() ?? 0,
+      workoutHours: (json['workout_hours'] as num?)?.toInt() ?? 0,
     );
   }
 

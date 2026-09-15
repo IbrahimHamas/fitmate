@@ -22,12 +22,18 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   Future<void> updateProfile(ProfileModel profile) async {
-    emit(ProfileUpdating(profile));
+    // 1. إظهار حالة النجاح فوراً بالتحديث المحلي (Optimistic UI Update)
+    emit(ProfileSuccess(profile));
+
     try {
+      // 2. تحديث البيانات في الـ Repository أو Supabase
       final updatedProfile = await repository.updateProfile(profile);
-      emit(ProfileUpdated(updatedProfile));
+
+      // 3. تأكيد التحديث النهائي بالبيانات القادمة من السيرفر
+      emit(ProfileSuccess(updatedProfile));
     } catch (e) {
-      emit(ProfileError(e.toString()));
+      // في حالة الفشل نرجع الـ Error لكن نفضل تحت الحفظ
+      emit(ProfileError('Failed to save: ${e.toString()}'));
     }
   }
 

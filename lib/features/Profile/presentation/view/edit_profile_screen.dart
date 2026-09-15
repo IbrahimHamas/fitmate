@@ -1,8 +1,10 @@
+import 'dart:typed_data';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:fit_up/core/themes/app_color.dart';
 import 'package:fit_up/features/profile/data/models/profile_model.dart';
 import 'package:fit_up/features/profile/presentation/view_model/profile_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final ProfileModel profile;
@@ -14,10 +16,12 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  final _formKey = GlobalKey<FormState>();
   late TextEditingController _nameController;
   late TextEditingController _emailController;
   late TextEditingController _phoneController;
+
+  Uint8List? _selectedImageBytes;
+  final ImagePicker _picker = ImagePicker();
 
   @override
   void initState() {
@@ -35,131 +39,197 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     super.dispose();
   }
 
-  void _saveProfile() {
-    if (_formKey.currentState!.validate()) {
-      final updatedProfile = widget.profile.copyWith(
-        fullName: _nameController.text.trim(),
-        email: _emailController.text.trim(),
-        phoneNumber: _phoneController.text.trim(),
+  Future<void> _pickImage() async {
+    try {
+      final XFile? pickedFile = await _picker.pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 1000,
+        maxHeight: 1000,
+        imageQuality: 85,
       );
 
-      context.read<ProfileCubit>().updateProfile(updatedProfile);
-      Navigator.pop(context);
+      if (pickedFile != null) {
+        final bytes = await pickedFile.readAsBytes();
+        setState(() {
+          _selectedImageBytes = bytes;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Error picking image: $e')));
+      }
     }
+  }
+
+  void _saveProfile() {
+    final updatedProfile = widget.profile.copyWith(
+      fullName: _nameController.text.trim(),
+      email: _emailController.text.trim(),
+      phoneNumber: _phoneController.text.trim(),
+      profileImage: widget.profile.profileImage,
+    );
+
+    context.read<ProfileCubit>().updateProfile(updatedProfile);
+    Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Edit Profile')),
+      backgroundColor: AppColor.background,
+      appBar: AppBar(
+        backgroundColor: AppColor.background,
+        title: const Text(
+          'Edit Profile',
+          style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+        elevation: 0,
+      ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // Avatar Change Section
-              Center(
-                child: Stack(
-                  alignment: Alignment.bottomRight,
-                  children: [
-                    CircleAvatar(
-                      radius: 50,
-                      backgroundColor: AppColor.surfaceElevated,
-                      backgroundImage: widget.profile.profileImage != null
-                          ? NetworkImage(widget.profile.profileImage!)
-                          : null,
-                      child: widget.profile.profileImage == null
-                          ? const Icon(
-                              Icons.person,
-                              size: 50,
-                              color: AppColor.textSecondary,
-                            )
-                          : null,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        // Image picker logic
-                      },
-                      child: const CircleAvatar(
-                        radius: 16,
-                        backgroundColor: AppColor.primary,
-                        child: Icon(
-                          Icons.camera_alt,
-                          size: 16,
-                          color: AppColor.onPrimary,
-                        ),
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            // Profile Picture Section
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 55,
+                  backgroundColor: Colors.grey[800],
+                  backgroundImage: _selectedImageBytes != null
+                      ? MemoryImage(_selectedImageBytes!)
+                      : (widget.profile.profileImage != null &&
+                                widget.profile.profileImage!.isNotEmpty
+                            ? NetworkImage(widget.profile.profileImage!)
+                                  as ImageProvider
+                            : null),
+                  child:
+                      (_selectedImageBytes == null &&
+                          (widget.profile.profileImage == null ||
+                              widget.profile.profileImage!.isEmpty))
+                      ? const Icon(
+                          Icons.person,
+                          size: 55,
+                          color: Colors.white70,
+                        )
+                      : null,
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 4,
+                  child: GestureDetector(
+                    onTap: _pickImage,
+                    child: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: const BoxDecoration(
+                        color: Colors.cyan,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.camera_alt_outlined,
+                        size: 18,
+                        color: Colors.white,
                       ),
                     ),
-                  ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+
+            TextButton(
+              onPressed: _pickImage,
+              child: const Text(
+                'Change Profile Photo',
+                style: TextStyle(
+                  color: Colors.cyan,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              const SizedBox(height: 8),
-              TextButton(
-                onPressed: () {
-                  // Change profile photo handler
-                },
-                child: const Text('Change Profile Photo'),
-              ),
-              const SizedBox(height: 24),
+            ),
+            const SizedBox(height: 24),
 
-              // Inputs Section
-              TextFormField(
-                controller: _nameController,
-                decoration: const InputDecoration(
-                  labelText: 'Full Name',
-                  prefixIcon: Icon(Icons.person_outline),
+            // Text Fields
+            _buildTextField(
+              controller: _nameController,
+              label: 'Full Name',
+              icon: Icons.person_outline,
+            ),
+            _buildTextField(
+              controller: _emailController,
+              label: 'Email Address',
+              icon: Icons.email_outlined,
+            ),
+            _buildTextField(
+              controller: _phoneController,
+              label: 'Phone Number',
+              icon: Icons.phone_outlined,
+            ),
+            const SizedBox(height: 32),
+
+            // Save & Cancel Buttons
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: _saveProfile,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.cyan,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
-                validator: (val) => val == null || val.isEmpty
-                    ? 'Please enter your name'
-                    : null,
-              ),
-              const SizedBox(height: 16),
-
-              TextFormField(
-                controller: _emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Email Address',
-                  prefixIcon: Icon(Icons.email_outlined),
-                ),
-                validator: (val) => val == null || val.isEmpty
-                    ? 'Please enter your email'
-                    : null,
-              ),
-              const SizedBox(height: 16),
-
-              TextFormField(
-                controller: _phoneController,
-                decoration: const InputDecoration(
-                  labelText: 'Phone Number',
-                  prefixIcon: Icon(Icons.phone_outlined),
-                ),
-              ),
-              const SizedBox(height: 32),
-
-              // Save Button
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: _saveProfile,
-                  child: const Text('Save Changes'),
-                ),
-              ),
-              const SizedBox(height: 12),
-
-              // Cancel Button
-              SizedBox(
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text(
-                    'Cancel Changes',
-                    style: TextStyle(color: AppColor.textSecondary),
+                child: const Text(
+                  'Save Changes',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-            ],
+            ),
+            const SizedBox(height: 12),
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text(
+                'Cancel Changes',
+                style: TextStyle(color: Colors.white60),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required IconData icon,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16.0),
+      child: TextField(
+        controller: controller,
+        style: const TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          labelText: label,
+          labelStyle: const TextStyle(color: Colors.grey),
+          prefixIcon: Icon(icon, color: Colors.grey),
+          filled: true,
+          fillColor: AppColor.surfaceElevated,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide.none,
+          ),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 14,
           ),
         ),
       ),
