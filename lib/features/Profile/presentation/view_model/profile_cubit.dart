@@ -2,14 +2,17 @@ import 'package:fit_up/features/profile/data/models/profile_model.dart';
 import 'package:fit_up/features/profile/data/repository/profile_repository.dart';
 import 'package:fit_up/features/profile/presentation/view_model/profile_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   final ProfileRepository repository;
+  final SupabaseClient supabaseClient;
 
-  ProfileCubit(this.repository) : super(const ProfileInitial());
+  ProfileCubit({required this.repository, required this.supabaseClient})
+    : super(ProfileInitial());
 
   Future<void> getProfile() async {
-    emit(const ProfileLoading());
+    emit(ProfileLoading());
     try {
       final profile = await repository.getProfile();
       emit(ProfileSuccess(profile));
@@ -23,6 +26,16 @@ class ProfileCubit extends Cubit<ProfileState> {
     try {
       final updatedProfile = await repository.updateProfile(profile);
       emit(ProfileUpdated(updatedProfile));
+    } catch (e) {
+      emit(ProfileError(e.toString()));
+    }
+  }
+
+  Future<void> signOut() async {
+    emit(ProfileLoading());
+    try {
+      await supabaseClient.auth.signOut();
+      emit(ProfileLoggedOut());
     } catch (e) {
       emit(ProfileError(e.toString()));
     }

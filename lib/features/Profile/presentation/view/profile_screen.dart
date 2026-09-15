@@ -1,6 +1,5 @@
+import 'package:fit_up/core/routing/routes.dart';
 import 'package:fit_up/core/themes/app_color.dart';
-import 'package:fit_up/features/Profile/presentation/view/edit_profile_screen.dart';
-import 'package:fit_up/features/profile/data/models/profile_model.dart';
 import 'package:fit_up/features/profile/presentation/view_model/profile_cubit.dart';
 import 'package:fit_up/features/profile/presentation/view_model/profile_state.dart';
 import 'package:fit_up/features/profile/presentation/widgets/profile_header.dart';
@@ -12,127 +11,127 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        backgroundColor: AppColor.surfaceElevated,
+        title: const Text(
+          'Log Out',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        content: const Text(
+          'Are you sure you want to log out?',
+          style: TextStyle(color: Colors.white70),
+        ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.settings_outlined),
-            onPressed: () {},
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('Cancel', style: TextStyle(color: Colors.grey)),
+          ),
+          TextButton(
+            onPressed: () async {
+              Navigator.pop(dialogContext);
+              await context.read<ProfileCubit>().signOut();
+            },
+            child: const Text('Log Out', style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
-      body: BlocBuilder<ProfileCubit, ProfileState>(
-        builder: (context, state) {
-          if (state is ProfileLoading) {
-            return const Center(child: CircularProgressIndicator());
-          }
+    );
+  }
 
-          if (state is ProfileError) {
-            return Center(
-              child: Text(
-                state.message,
-                style: const TextStyle(color: AppColor.danger),
-              ),
-            );
-          }
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<ProfileCubit, ProfileState>(
+      listener: (context, state) {
+        if (state is ProfileLoggedOut) {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            Routes.welcome,
+            (route) => false,
+          );
+        } else if (state is ProfileError) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
+        }
+      },
+      builder: (context, state) {
+        // استخراج بيانات الـ profile لو مجمعة في الـ State
+        final dynamic currentProfile = (state is ProfileSuccess)
+            ? state.profile
+            : null;
 
-          // Dummy model for preview if state is Initial/Empty
-          final profile = (state is ProfileSuccess)
-              ? state.profile
-              : (state is ProfileUpdated)
-              ? state.profile
-              : const ProfileModel(
-                  fullName: 'Alex Rivera',
-                  email: 'alex.rivera@example.com',
-                  phoneNumber: '+1 (555) 123-4567',
-                  plansCompleted: 5,
-                  workoutHours: 120,
-                );
-
-          return SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        return Scaffold(
+          backgroundColor: AppColor.background,
+          appBar: AppBar(
+            backgroundColor: AppColor.background,
+            title: const Text('Profile', style: TextStyle(color: Colors.white)),
+            centerTitle: true,
+            elevation: 0,
+          ),
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // 1. Profile Header Widget
-                Center(
-                  child: ProfileHeader(
-                    name: profile.fullName,
-                    email: profile.email,
-                    imageUrl: profile.profileImage,
-                    onEdit: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => EditProfileScreen(profile: profile),
-                        ),
-                      );
-                    },
-                  ),
+                ProfileHeader(
+                  name: currentProfile?.name ?? '',
+                  email: currentProfile?.email ?? '',
+                  onEdit: () {
+                    Navigator.pushNamed(
+                      context,
+                      Routes.editProfile,
+                      arguments: currentProfile,
+                    );
+                  },
                 ),
                 const SizedBox(height: 24),
-
-                // 2. Statistics Section (5 Plans & 120 Hours)
-                Row(
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    ProfileStatCard(title: 'Workouts', value: '12', label: ''),
                     ProfileStatCard(
-                      title: 'Plans',
-                      value: profile.plansCompleted.toString(),
-                      label: 'Completed',
+                      title: 'Calories',
+                      value: '1,450',
+                      label: '',
                     ),
-                    const SizedBox(width: 12),
                     ProfileStatCard(
-                      title: 'Hours',
-                      value: profile.workoutHours.toString(),
-                      label: 'Trained',
+                      title: 'Time (hrs)',
+                      value: '8.5',
+                      label: '',
                     ),
                   ],
                 ),
                 const SizedBox(height: 32),
-
-                // 3. Account Settings Section
-                Text(
-                  'Account Settings',
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: AppColor.textSecondary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 12),
-
                 ProfileMenuItem(
-                  icon: Icons.notifications_none_rounded,
-                  title: 'Notifications',
-                  onTap: () {},
+                  icon: Icons.person_outline,
+                  title: 'Edit Profile',
+                  onTap: () {
+                    // إرسال كائن البيانات للـ EditProfileScreen لمنع الإيرور
+                    Navigator.pushNamed(
+                      context,
+                      Routes.editProfile,
+                      arguments: currentProfile,
+                    );
+                  },
                 ),
                 ProfileMenuItem(
-                  icon: Icons.lock_outline_rounded,
-                  title: 'Privacy & Security',
+                  icon: Icons.settings_outlined,
+                  title: 'Settings',
                   onTap: () {},
                 ),
-                ProfileMenuItem(
-                  icon: Icons.language_rounded,
-                  title: 'Language',
-                  trailingText: 'English',
-                  onTap: () {},
-                ),
-                const Divider(height: 32),
                 ProfileMenuItem(
                   icon: Icons.logout_rounded,
                   title: 'Log Out',
                   isLogout: true,
-                  onTap: () {
-                    // Sign-out action handling
-                  },
+                  onTap: () => _showLogoutDialog(context),
                 ),
               ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

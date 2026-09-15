@@ -1,37 +1,29 @@
 import 'package:fit_up/features/profile/data/models/profile_model.dart';
 
-sealed class ProfileState {
-  const ProfileState();
-}
+abstract class ProfileState {}
 
-class ProfileInitial extends ProfileState {
-  const ProfileInitial();
-}
+class ProfileInitial extends ProfileState {}
 
-class ProfileLoading extends ProfileState {
-  const ProfileLoading();
-}
+class ProfileLoading extends ProfileState {}
 
 class ProfileSuccess extends ProfileState {
   final ProfileModel profile;
-
-  const ProfileSuccess(this.profile);
-}
-
-class ProfileError extends ProfileState {
-  final String message;
-
-  const ProfileError(this.message);
+  ProfileSuccess(this.profile);
 }
 
 class ProfileUpdating extends ProfileState {
   final ProfileModel profile;
-
-  const ProfileUpdating(this.profile);
+  ProfileUpdating(this.profile);
 }
 
 class ProfileUpdated extends ProfileState {
   final ProfileModel profile;
-
-  const ProfileUpdated(this.profile);
+  ProfileUpdated(this.profile);
 }
+
+class ProfileError extends ProfileState {
+  final String message;
+  ProfileError(this.message);
+}
+
+class ProfileLoggedOut extends ProfileState {}
