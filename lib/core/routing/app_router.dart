@@ -1,14 +1,14 @@
+import 'package:fitmate/core/dependency_injection/injection_container.dart';
+import 'package:fitmate/core/routing/routes.dart';
+import 'package:fitmate/features/profile/data/models/profile_model.dart';
+import 'package:fitmate/features/profile/presentation/view/edit_profile_screen.dart';
+import 'package:fitmate/features/profile/presentation/view/profile_screen.dart';
+import 'package:fitmate/features/profile/presentation/view_model/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fit_up/core/dependency_injection/injection_container.dart';
-import 'package:fit_up/core/routing/routes.dart';
-import 'package:fit_up/features/profile/data/models/profile_model.dart';
-import 'package:fit_up/features/profile/presentation/view/edit_profile_screen.dart';
-import 'package:fit_up/features/profile/presentation/view/profile_screen.dart';
-import 'package:fit_up/features/profile/presentation/view_model/profile_cubit.dart';
 
 class AppRouter {
-  Route? generateRoute(RouteSettings settings) {
+  static Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.profile:
         return MaterialPageRoute(
@@ -40,6 +40,10 @@ class AppRouter {
             ),
           ),
         );
+
+      // plan details
+      /* case Routes.planDetails:
+        return MaterialPageRoute(builder: (_) => PlanDetails()); */
 
       default:
         return MaterialPageRoute(

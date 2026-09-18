@@ -1,6 +1,8 @@
 {
-    "name": "fit_up",
-    "short_name": "fit_up",
+
+    "name": "fitmate",
+    "short_name": "fitmate",
+
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

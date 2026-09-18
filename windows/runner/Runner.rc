@@ -90,12 +90,21 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
+<<<<<<< HEAD
             VALUE "FileDescription", "fit_up" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "fit_up" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2026 com.example. All rights reserved." "\0"
             VALUE "OriginalFilename", "fit_up.exe" "\0"
             VALUE "ProductName", "fit_up" "\0"
+=======
+            VALUE "FileDescription", "fitmate" "\0"
+            VALUE "FileVersion", VERSION_AS_STRING "\0"
+            VALUE "InternalName", "fitmate" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2026 com.example. All rights reserved." "\0"
+            VALUE "OriginalFilename", "fitmate.exe" "\0"
+            VALUE "ProductName", "fitmate" "\0"
+>>>>>>> 14fbf8fe3aa7a9967b7891032dfaf458a0071789
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

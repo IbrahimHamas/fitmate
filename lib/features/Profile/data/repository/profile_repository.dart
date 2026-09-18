@@ -1,5 +1,5 @@
-import 'package:fit_up/features/profile/data/data_source/profile_remote_data_source.dart';
-import 'package:fit_up/features/profile/data/models/profile_model.dart';
+import 'package:fitmate/features/profile/data/data_source/profile_remote_data_source.dart';
+import 'package:fitmate/features/profile/data/models/profile_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProfileRepository {

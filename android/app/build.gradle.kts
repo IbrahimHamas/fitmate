@@ -6,7 +6,11 @@ plugins {
 }
 
 android {
+<<<<<<< HEAD
     namespace = "com.example.fit_up"
+=======
+    namespace = "com.example.fitmate"
+>>>>>>> 14fbf8fe3aa7a9967b7891032dfaf458a0071789
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -21,7 +25,11 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+<<<<<<< HEAD
         applicationId = "com.example.fit_up"
+=======
+        applicationId = "com.example.fitmate"
+>>>>>>> 14fbf8fe3aa7a9967b7891032dfaf458a0071789
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

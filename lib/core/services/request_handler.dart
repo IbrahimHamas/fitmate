@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:fit_up/core/services/errors/failure.dart';
-import 'package:fit_up/core/services/errors/supabase_error_mapper.dart';
+import 'package:fitmate/core/services/errors/failure.dart';
+import 'package:fitmate/core/services/errors/supabase_error_mapper.dart';
 import 'package:flutter/foundation.dart';
 
 /// Runs a repository operation and returns its success or failure.

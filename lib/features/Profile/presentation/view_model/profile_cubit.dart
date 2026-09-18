@@ -1,6 +1,6 @@
-import 'package:fit_up/features/profile/data/models/profile_model.dart';
-import 'package:fit_up/features/profile/data/repository/profile_repository.dart';
-import 'package:fit_up/features/profile/presentation/view_model/profile_state.dart';
+import 'package:fitmate/features/profile/data/models/profile_model.dart';
+import 'package:fitmate/features/profile/data/repository/profile_repository.dart';
+import 'package:fitmate/features/profile/presentation/view_model/profile_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

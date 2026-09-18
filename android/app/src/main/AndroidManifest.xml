@@ -1,6 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
+<<<<<<< HEAD
         android:label="fit_up"
+=======
+        android:label="fitmate"
+>>>>>>> 14fbf8fe3aa7a9967b7891032dfaf458a0071789
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -20,6 +24,7 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
+<<<<<<< HEAD
               <intent-filter>
                   <action android:name="android.intent.action.VIEW" />
 
@@ -30,6 +35,8 @@
                       android:scheme="fitness"
                       android:host="reset-password" />
             </intent-filter>
+=======
+>>>>>>> 14fbf8fe3aa7a9967b7891032dfaf458a0071789
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

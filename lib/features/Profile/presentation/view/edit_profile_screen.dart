@@ -1,10 +1,10 @@
 import 'dart:typed_data';
+import 'package:fitmate/core/themes/app_color.dart';
+import 'package:fitmate/features/Profile/presentation/view_model/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:fit_up/core/themes/app_color.dart';
-import 'package:fit_up/features/profile/data/models/profile_model.dart';
-import 'package:fit_up/features/profile/presentation/view_model/profile_cubit.dart';
+import 'package:fitmate/features/profile/data/models/profile_model.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final ProfileModel profile;

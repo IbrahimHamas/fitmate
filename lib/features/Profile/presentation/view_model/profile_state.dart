@@ -1,4 +1,4 @@
-import 'package:fit_up/features/profile/data/models/profile_model.dart';
+import 'package:fitmate/features/profile/data/models/profile_model.dart';
 
 abstract class ProfileState {}
 

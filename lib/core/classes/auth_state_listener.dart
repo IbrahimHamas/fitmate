@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:fit_up/core/routing/routes.dart';
+import 'package:fitmate/core/routing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

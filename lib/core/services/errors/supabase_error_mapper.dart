@@ -1,18 +1,21 @@
 import 'dart:async';
-
-import 'package:fit_up/core/services/errors/failure.dart';
+import 'package:fitmate/core/services/errors/failure.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract final class SupabaseErrorMapper {
   static const Map<String, String> _authMessages = {
     'invalid_credentials': 'The sign-in details are incorrect.',
     'email_not_confirmed': 'Please confirm your email before signing in.',
-    'phone_not_confirmed': 'Please confirm your phone number before signing in.',
+
+    'phone_not_confirmed':
+        'Please confirm your phone number before signing in.',
     'email_exists': 'An account with this email already exists.',
     'user_already_exists': 'An account with these details already exists.',
     'weak_password': 'Please choose a stronger password.',
-    'same_password': 'Please choose a password different from your current one.',
-    'otp_expired': 'The verification link or code has expired. Request a new one.',
+    'same_password':
+        'Please choose a password different from your current one.',
+    'otp_expired':
+        'The verification link or code has expired. Request a new one.',
     'session_not_found': 'Please sign in again to continue.',
     'session_expired': 'Your session has expired. Please sign in again.',
     'refresh_token_not_found': 'Please sign in again to continue.',
@@ -47,13 +50,17 @@ abstract final class SupabaseErrorMapper {
 
     if (error is AuthException) {
       final statusCode = int.tryParse(error.statusCode ?? '');
-      final message = error is AuthRetryableFetchException
-          ? 'Unable to reach the service. Please try again.'
-          : _authMessages[error.code] ??
-                _httpMessage(
-                  statusCode,
-                  fallback: 'Unable to complete authentication. Please try again.',
-                );
+      final String message;
+      if (error is AuthRetryableFetchException) {
+        message = 'Unable to reach the service. Please try again.';
+      } else {
+        message =
+            _authMessages[error.code] ??
+            _httpMessage(
+              statusCode,
+              fallback: 'Unable to complete authentication. Please try again.',
+            );
+      }
 
       return Failure(
         message: message,

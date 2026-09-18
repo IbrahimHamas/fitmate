@@ -3,4 +3,5 @@ class Routes {
   static const String profile = '/profile';
   static const String editProfile = '/editProfile';
   static const String resetPassword = '/resetPassword';
+  static const String planDetails = "/planDetails";
 }

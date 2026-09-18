@@ -1,4 +1,4 @@
-import 'package:fit_up/core/themes/app_color.dart';
+import 'package:fitmate/core/themes/app_color.dart';
 import 'package:flutter/material.dart';
 
 extension SnackBarContextExtension on BuildContext {

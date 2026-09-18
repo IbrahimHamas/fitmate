@@ -1,5 +1,5 @@
-import 'package:fit_up/features/MainHome/data/models/navigation_item_model.dart';
-import 'package:fit_up/features/MainHome/presentation/view_model/main_home_cubit.dart';
+import 'package:fitmate/features/MainHome/data/models/navigation_item_model.dart';
+import 'package:fitmate/features/MainHome/presentation/view_model/main_home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
