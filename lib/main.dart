@@ -4,6 +4,7 @@ import 'package:fitmate/core/routing/app_router.dart';
 import 'package:fitmate/core/routing/routes.dart';
 import 'package:fitmate/core/themes/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,11 +18,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.darkTheme,
-      onGenerateRoute: AppRouter.generateRoute,
-      initialRoute: Routes.welcome,
+    return ScreenUtilInit(
+        designSize: Size(390, 884),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.darkTheme,
+        onGenerateRoute: AppRouter.generateRoute,
+        initialRoute: Routes.welcome,
+      ),
     );
   }
 }
