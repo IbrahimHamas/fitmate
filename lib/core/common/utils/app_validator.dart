@@ -1,4 +1,17 @@
 abstract final class AppValidator {
+  static String? fullName(String? value) {
+    final error = requiredField(value, field: 'Full name');
+    if (error != null) return error;
+    final length = value!.trim().length;
+    if (length < 2) return 'Enter your full name';
+    if (length > 80) return 'Full name must be at most 80 characters';
+    return null;
+  }
+
+  // Existing accounts may have passwords shorter than the signup policy.
+  static String? loginPassword(String? value) =>
+      value == null || value.isEmpty ? 'Password is required' : null;
+
   static String? requiredField(String? value, {String field = 'This field'}) {
     if (value == null || value.trim().isEmpty) return '$field is required';
     return null;

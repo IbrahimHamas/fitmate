@@ -1,27 +1,19 @@
-import 'package:fitmate/core/config/supabase_config.dart';
 import 'package:fitmate/core/dependency_injection/injection_container.dart';
+import 'package:fitmate/core/networking/supabase_helper.dart';
 import 'package:fitmate/core/routing/app_router.dart';
 import 'package:fitmate/core/routing/routes.dart';
-import 'package:fitmate/core/themes/app_theme.dart';
+import 'package:fitmate/fit_app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await SupabaseConfig.init();
+  final binding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: binding);
+
+  await SupabaseHelper.init();
+
   await initDependencies();
-  runApp(const MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.darkTheme,
-      onGenerateRoute: AppRouter.generateRoute,
-      initialRoute: Routes.welcome,
-    );
-  }
+  runApp(FitApp(appRouter: AppRouter(), initialRoute: Routes.welcome));
+  FlutterNativeSplash.remove();
 }
