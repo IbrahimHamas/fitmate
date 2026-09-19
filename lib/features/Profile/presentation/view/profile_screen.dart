@@ -1,13 +1,15 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:fitmate/core/extensions/snack_bar_context_extension.dart';
 import 'package:fitmate/core/routing/routes.dart';
 import 'package:fitmate/core/themes/app_color.dart';
 import 'package:fitmate/features/profile/data/models/profile_model.dart';
 import 'package:fitmate/features/profile/presentation/view_model/profile_cubit.dart';
 import 'package:fitmate/features/profile/presentation/view_model/profile_state.dart';
-import 'package:fitmate/features/profile/presentation/widgets/profile_header.dart';
-import 'package:fitmate/features/profile/presentation/widgets/profile_menu_item.dart';
-import 'package:fitmate/features/profile/presentation/widgets/profile_stat_card.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fitmate/features/profile/presentation/view/widgets/profile_header.dart';
+import 'package:fitmate/features/profile/presentation/view/widgets/profile_menu_item.dart';
+import 'package:fitmate/features/profile/presentation/view/widgets/profile_stat_card.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -31,9 +33,8 @@ class ProfileScreen extends StatelessWidget {
             child: const Text('Cancel', style: TextStyle(color: Colors.grey)),
           ),
           TextButton(
-            onPressed: () async {
+            onPressed: () {
               Navigator.pop(dialogContext);
-              await context.read<ProfileCubit>().signOut();
             },
             child: const Text('Log Out', style: TextStyle(color: Colors.red)),
           ),
@@ -46,16 +47,8 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<ProfileCubit, ProfileState>(
       listener: (context, state) {
-        if (state is ProfileLoggedOut) {
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            Routes.welcome,
-            (route) => false,
-          );
-        } else if (state is ProfileError) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(state.message)));
+        if (state is ProfileError) {
+          context.showErrorSnackBar(state.message);
         }
       },
       builder: (context, state) {
@@ -64,10 +57,8 @@ class ProfileScreen extends StatelessWidget {
             : null;
 
         return Scaffold(
-          backgroundColor: AppColor.background,
           appBar: AppBar(
-            backgroundColor: AppColor.background,
-            title: const Text('Profile', style: TextStyle(color: Colors.white)),
+            title: const Text('Profile'),
             centerTitle: true,
             elevation: 0,
           ),
@@ -75,12 +66,10 @@ class ProfileScreen extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                // ممررين الصورة والبيانات للـ Header
                 ProfileHeader(
                   name: currentProfile?.fullName ?? '',
                   email: currentProfile?.email ?? '',
-                  imageUrl:
-                      currentProfile?.profileImage, // لو الموديل فيه imageUrl
+                  imageUrl: currentProfile?.profileImage,
                   onEdit: () {
                     Navigator.pushNamed(
                       context,

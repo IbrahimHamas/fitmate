@@ -15,24 +15,18 @@ Future<void> initDependencies() async {
     () => SharedPreferencesService(),
   );
 
-  // Profile Data Source (بدون arguments)
+  // Profile Data Source
   sl.registerLazySingleton<ProfileRemoteDataSource>(
     () => ProfileRemoteDataSource(),
   );
 
-  // Profile Repository
+  // Profile Repository (تمرير remoteDataSource فقط بدون supabaseClient)
   sl.registerLazySingleton<ProfileRepository>(
-    () => ProfileRepository(
-      sl<ProfileRemoteDataSource>(),
-      supabaseClient: sl<SupabaseClient>(),
-    ),
+    () => ProfileRepository(remoteDataSource: sl<ProfileRemoteDataSource>()),
   );
 
   // Profile Cubit
   sl.registerFactory<ProfileCubit>(
-    () => ProfileCubit(
-      repository: sl<ProfileRepository>(),
-      supabaseClient: sl<SupabaseClient>(),
-    ),
+    () => ProfileCubit(profileRepository: sl<ProfileRepository>()),
   );
 }

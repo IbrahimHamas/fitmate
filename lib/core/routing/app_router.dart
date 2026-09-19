@@ -1,11 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:fitmate/core/dependency_injection/injection_container.dart';
 import 'package:fitmate/core/routing/routes.dart';
 import 'package:fitmate/features/profile/data/models/profile_model.dart';
 import 'package:fitmate/features/profile/presentation/view/edit_profile_screen.dart';
 import 'package:fitmate/features/profile/presentation/view/profile_screen.dart';
 import 'package:fitmate/features/profile/presentation/view_model/profile_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppRouter {
   static Route? generateRoute(RouteSettings settings) {
@@ -25,8 +26,8 @@ class AppRouter {
 
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => BlocProvider(
-            create: (_) => sl<ProfileCubit>(),
+          builder: (_) => BlocProvider.value(
+            value: sl<ProfileCubit>(),
             child: EditProfileScreen(
               profile:
                   profileModel ??
@@ -40,10 +41,6 @@ class AppRouter {
             ),
           ),
         );
-
-      // plan details
-      /* case Routes.planDetails:
-        return MaterialPageRoute(builder: (_) => PlanDetails()); */
 
       default:
         return MaterialPageRoute(

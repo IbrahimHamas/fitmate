@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fitmate/features/profile/data/models/profile_model.dart';
 
 class ProfileRemoteDataSource {
@@ -6,7 +8,10 @@ class ProfileRemoteDataSource {
     throw UnimplementedError('Profile Supabase table is not configured yet.');
   }
 
-  Future<ProfileModel> updateProfile(ProfileModel profile) async {
+  Future<ProfileModel> updateProfile(
+    ProfileModel profile, {
+    File? imageFile,
+  }) async {
     throw UnimplementedError('Profile Supabase table is not configured yet.');
   }
 }

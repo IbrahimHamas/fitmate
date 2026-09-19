@@ -1,5 +1,6 @@
 import 'package:fitmate/features/MainHome/data/models/navigation_item_model.dart';
 import 'package:fitmate/features/MainHome/presentation/view_model/main_home_cubit.dart';
+import 'package:fitmate/features/profile/presentation/view/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,37 +12,31 @@ class MainHomeView extends StatelessWidget {
       label: 'Home',
       icon: Icons.home_outlined,
       selectedIcon: Icons.home_rounded,
-      page: Placeholder(),
+      page: const Placeholder(),
     ),
     NavigationItemModel(
       label: 'Trainers',
-      icon: Icons.shopping_cart_outlined,
-      selectedIcon: Icons.shopping_cart_rounded,
-      page: Placeholder(),
+      icon: Icons.fitness_center_outlined,
+      selectedIcon: Icons.fitness_center_rounded,
+      page: const Placeholder(),
     ),
     NavigationItemModel(
       label: 'Plans',
+      icon: Icons.calendar_today_outlined,
+      selectedIcon: Icons.calendar_today_rounded,
+      page: const Placeholder(),
+    ),
+    NavigationItemModel(
+      label: 'Favorites',
       icon: Icons.favorite_border_rounded,
       selectedIcon: Icons.favorite_rounded,
-      page: Placeholder(),
-    ),
-    NavigationItemModel(
-      label: 'Favorites',
-      icon: Icons.menu_rounded,
-      selectedIcon: Icons.menu_open_rounded,
-      page: Placeholder(),
-    ),
-    NavigationItemModel(
-      label: 'Favorites',
-      icon: Icons.menu_rounded,
-      selectedIcon: Icons.menu_open_rounded,
-      page: Placeholder(),
+      page: const Placeholder(),
     ),
     NavigationItemModel(
       label: 'Profile',
-      icon: Icons.menu_rounded,
-      selectedIcon: Icons.menu_open_rounded,
-      page: Placeholder(),
+      icon: Icons.person_outline_rounded,
+      selectedIcon: Icons.person_rounded,
+      page: const ProfileScreen(), // تم ربط شاشة البروفايل هنا
     ),
   ];
 

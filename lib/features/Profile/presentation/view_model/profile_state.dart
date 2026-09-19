@@ -11,19 +11,7 @@ class ProfileSuccess extends ProfileState {
   ProfileSuccess(this.profile);
 }
 
-class ProfileUpdating extends ProfileState {
-  final ProfileModel profile;
-  ProfileUpdating(this.profile);
-}
-
-class ProfileUpdated extends ProfileState {
-  final ProfileModel profile;
-  ProfileUpdated(this.profile);
-}
-
 class ProfileError extends ProfileState {
   final String message;
   ProfileError(this.message);
 }
-
-class ProfileLoggedOut extends ProfileState {}
