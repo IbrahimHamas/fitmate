@@ -1,14 +1,15 @@
-
-import 'package:fitmate/core/features/all_trainers/presentation/view_model/cubit/trainers_cubit.dart';
 import 'package:fitmate/core/themes/app_color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomErrorWidget extends StatelessWidget {
   final String message;
-
-  const CustomErrorWidget({super.key, required this.message});
+  final void Function()? onPressed;
+  const CustomErrorWidget({
+    super.key,
+    required this.message,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class CustomErrorWidget extends StatelessWidget {
             SizedBox(height: 14.h),
             ElevatedButton(
               onPressed: () {
-                context.read<TrainersCubit>().fetchTrainers();
+                onPressed;
               },
               child: const Text('Retry'),
             ),

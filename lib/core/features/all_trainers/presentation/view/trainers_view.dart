@@ -3,6 +3,7 @@ import 'package:fitmate/core/common/widgets/custom_error_widget.dart';
 import 'package:fitmate/core/features/all_trainers/presentation/view/widgets/custom_app_bar.dart';
 import 'package:fitmate/core/features/all_trainers/presentation/view/widgets/custom_search_bar.dart';
 import 'package:fitmate/core/features/all_trainers/presentation/view/widgets/empty_widget.dart';
+import 'package:fitmate/core/features/all_trainers/presentation/view/widgets/fetch_trainers.dart';
 import 'package:fitmate/core/features/all_trainers/presentation/view_model/cubit/trainers_cubit.dart';
 import 'package:fitmate/core/features/all_trainers/presentation/view_model/cubit/trainers_state.dart';
 import 'package:fitmate/core/themes/app_color.dart';
@@ -42,7 +43,6 @@ class _TrainersViewState extends State<TrainersView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.background,
       body: SafeArea(
         child: Column(
           children: [
@@ -58,7 +58,9 @@ class _TrainersViewState extends State<TrainersView> {
                   }
 
                   if (state is TrainersError) {
-                    return CustomErrorWidget(message: state.message);
+                    return CustomErrorWidget(message: state.message, onPressed: () { 
+                        fetchtraniers(context);
+                     },);
                   }
 
                   if (state is TrainersSuccess) {
