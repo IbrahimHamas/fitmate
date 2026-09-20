@@ -1,0 +1,17 @@
+flutter_native_splash:
+  # Generated from SplashContent with zero progress. Flutter displays this same
+  # bitmap for the first frame before revealing the responsive, live layout.
+  background_image: assets/images/splash/native_artwork.png
+  background_image_dark: assets/images/splash/native_artwork.png
+  android: true
+  ios: true
+  web: false
+  fullscreen: false
+
+  # Android 12+ requires a centered icon on a solid background. The Flutter
+  # handoff starts with the same icon, then fades into the full splash design.
+  android_12:
+    color: "#101922"
+    color_dark: "#101922"
+    image: assets/images/splash/native_logo_android12.png
+    image_dark: assets/images/splash/native_logo_android12.png

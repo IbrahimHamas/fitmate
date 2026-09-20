@@ -2,7 +2,6 @@ import 'package:fitmate/core/features/work_out_plans/presentation/view_model/cub
 import 'package:fitmate/core/features/work_out_plans/presentation/view_model/cubit/work_out_plans_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'widgets/workout_plan_card.dart';
 
@@ -25,19 +24,19 @@ class _WorkoutPlansViewState extends State<WorkoutPlansView> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 16.h),
+            const  SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.bolt, size: 28.sp),
-                      SizedBox(width: 6.w),
-                      Text('IronPulse', style: TextStyle(fontSize: 14.sp)),
+                      Icon(Icons.bolt, size: 28),
+                      SizedBox(width: 6),
+                      Text('IronPulse', style: TextStyle(fontSize: 14)),
                     ],
                   ),
                   IconButton(
@@ -46,28 +45,28 @@ class _WorkoutPlansViewState extends State<WorkoutPlansView> {
                   ),
                 ],
               ),
-              SizedBox(height: 16.h),
+          const    SizedBox(height: 16),
               TextField(
                 decoration: InputDecoration(
                   hintText: 'Search workouts...',
                   prefixIcon: const Icon(Icons.search),
                 ),
               ),
-              SizedBox(height: 20.h),
+            const  SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Featured Workout Plans',
-                    style: TextStyle(fontSize: 14.sp),
+                    style: TextStyle(fontSize: 14),
                   ),
                   TextButton(
                     onPressed: () {},
-                    child: Text('See All', style: TextStyle(fontSize: 12.sp)),
+                    child: Text('See All', style: TextStyle(fontSize: 12)),
                   ),
                 ],
               ),
-              SizedBox(height: 8.h),
+            const  SizedBox(height: 8),
               // Plans List
               Expanded(
                 child: BlocBuilder<WorkoutPlansCubit, WorkoutPlansState>(
