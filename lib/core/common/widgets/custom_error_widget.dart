@@ -1,6 +1,6 @@
+import 'package:fitmate/core/common/responsive/responsive.dart';
 import 'package:fitmate/core/themes/app_color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomErrorWidget extends StatelessWidget {
   final String message;
@@ -15,24 +15,26 @@ class CustomErrorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: EdgeInsets.all(24.w),
+        padding: EdgeInsets.all(Responsive.width(context, 24)),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.error_outline, color: AppColor.danger, size: 40.sp),
-            SizedBox(height: 10.h),
+            Icon(
+              Icons.error_outline,
+              color: AppColor.danger,
+              size: Responsive.font(context, 40),
+            ),
+            SizedBox(height: Responsive.height(context, 10)),
             Text(
               message,
               textAlign: TextAlign.center,
-              style: TextStyle(color: AppColor.textBody, fontSize: 13.sp),
+              style: TextStyle(
+                color: AppColor.textBody,
+                fontSize: Responsive.font(context, 13),
+              ),
             ),
-            SizedBox(height: 14.h),
-            ElevatedButton(
-              onPressed: () {
-                onPressed;
-              },
-              child: const Text('Retry'),
-            ),
+            SizedBox(height: Responsive.height(context, 14)),
+            ElevatedButton(onPressed: onPressed, child: const Text('Retry')),
           ],
         ),
       ),

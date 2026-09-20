@@ -1,5 +1,5 @@
- 
 import 'package:fitmate/core/common/widgets/custom_error_widget.dart';
+import 'package:fitmate/core/common/responsive/responsive.dart';
 import 'package:fitmate/core/features/all_trainers/presentation/view/widgets/custom_app_bar.dart';
 import 'package:fitmate/core/features/all_trainers/presentation/view/widgets/custom_search_bar.dart';
 import 'package:fitmate/core/features/all_trainers/presentation/view/widgets/empty_widget.dart';
@@ -9,7 +9,6 @@ import 'package:fitmate/core/features/all_trainers/presentation/view_model/cubit
 import 'package:fitmate/core/themes/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'widgets/trainer_card_widget.dart';
 
@@ -58,9 +57,12 @@ class _TrainersViewState extends State<TrainersView> {
                   }
 
                   if (state is TrainersError) {
-                    return CustomErrorWidget(message: state.message, onPressed: () { 
+                    return CustomErrorWidget(
+                      message: state.message,
+                      onPressed: () {
                         fetchtraniers(context);
-                     },);
+                      },
+                    );
                   }
 
                   if (state is TrainersSuccess) {
@@ -69,7 +71,12 @@ class _TrainersViewState extends State<TrainersView> {
                     }
 
                     return ListView.builder(
-                      padding: EdgeInsets.fromLTRB(12.w, 14.h, 12.w, 20.h),
+                      padding: EdgeInsets.fromLTRB(
+                        Responsive.width(context, 12),
+                        Responsive.height(context, 14),
+                        Responsive.width(context, 12),
+                        Responsive.height(context, 20),
+                      ),
                       itemCount: state.trainers.length,
                       itemBuilder: (context, index) {
                         final trainer = state.trainers[index];
@@ -77,7 +84,6 @@ class _TrainersViewState extends State<TrainersView> {
                         return TrainerCardWidget(
                           trainer: trainer,
                           onTap: () {
-                            
                             // Navigate to trainer profile
                           },
                         );

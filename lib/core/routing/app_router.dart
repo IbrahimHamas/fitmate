@@ -6,12 +6,40 @@ import 'package:fitmate/core/features/all_trainers/presentation/view_model/cubit
 import 'package:fitmate/core/features/work_out_plans/presentation/view/workout_plans_view.dart';
 import 'package:fitmate/core/features/work_out_plans/presentation/view_model/cubit/work_out_plans_cubit.dart';
 import 'package:fitmate/core/routing/routes.dart';
+import 'package:fitmate/features/auth/presentation/view_model/auth_cubit.dart';
+import 'package:fitmate/features/auth/presentation/views/login_view.dart';
+import 'package:fitmate/features/auth/presentation/views/sign_up_view.dart';
+import 'package:fitmate/features/welcome/presentation/views/welcome_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppRouter {
-  static Route? generateRoute(RouteSettings settings) {
+  Route<dynamic>? generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.welcome:
+        return PageRouteBuilder<void>(
+          settings: settings,
+          transitionDuration: const Duration(milliseconds: 280),
+          pageBuilder: (context, _, _) => WelcomeView(
+            onGetStarted: () => Navigator.of(context).pushNamed(Routes.login),
+          ),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            if (MediaQuery.disableAnimationsOf(context)) return child;
+            return FadeTransition(opacity: animation, child: child);
+          },
+        );
+      case Routes.login:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) =>
+              BlocProvider(create: (_) => sl<AuthCubit>(), child: LoginView()),
+        );
+      case Routes.signUp:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) =>
+              BlocProvider(create: (_) => sl<AuthCubit>(), child: SignUpView()),
+        );
       /*  case Routes.profile:
         return MaterialPageRoute(
           settings: settings,

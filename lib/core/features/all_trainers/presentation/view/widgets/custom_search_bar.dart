@@ -1,9 +1,8 @@
- 
 import 'package:fitmate/core/features/all_trainers/presentation/view_model/cubit/trainers_cubit.dart';
+import 'package:fitmate/core/common/responsive/responsive.dart';
 import 'package:fitmate/core/themes/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomSearchBar extends StatelessWidget {
   final TextEditingController controller;
@@ -13,30 +12,38 @@ class CustomSearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 12.w),
+      padding: EdgeInsets.symmetric(horizontal: Responsive.width(context, 12)),
       child: Container(
-        height: 43.h,
+        height: Responsive.height(context, 43),
         decoration: BoxDecoration(
           color: AppColor.surface,
-          borderRadius: BorderRadius.circular(9.r),
+          borderRadius: BorderRadius.circular(Responsive.radius(context, 9)),
         ),
         child: TextField(
           controller: controller,
           onChanged: (value) {
             context.read<TrainersCubit>().searchTrainers(value);
           },
-          style: TextStyle(color: AppColor.textPrimary, fontSize: 12.sp),
+          style: TextStyle(
+            color: AppColor.textPrimary,
+            fontSize: Responsive.font(context, 12),
+          ),
           cursorColor: AppColor.primary,
           decoration: InputDecoration(
             border: InputBorder.none,
             prefixIcon: Icon(
               Icons.search,
               color: AppColor.textSecondary,
-              size: 19.sp,
+              size: Responsive.font(context, 19),
             ),
             hintText: 'Search by name or specialty',
-            hintStyle: TextStyle(color: AppColor.hint, fontSize: 12.sp),
-            contentPadding: EdgeInsets.symmetric(vertical: 12.h),
+            hintStyle: TextStyle(
+              color: AppColor.hint,
+              fontSize: Responsive.font(context, 12),
+            ),
+            contentPadding: EdgeInsets.symmetric(
+              vertical: Responsive.height(context, 12),
+            ),
           ),
         ),
       ),

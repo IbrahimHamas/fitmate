@@ -1,8 +1,7 @@
- 
 import 'package:fitmate/core/features/all_trainers/data/models/trainer_model.dart';
+import 'package:fitmate/core/common/responsive/responsive.dart';
 import 'package:fitmate/core/themes/app_color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TrainerCardWidget extends StatelessWidget {
   final TrainerModel trainer;
@@ -18,38 +17,38 @@ class TrainerCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 12.h),
-      padding: EdgeInsets.all(12.w),
+      margin: EdgeInsets.only(bottom: Responsive.height(context, 12)),
+      padding: EdgeInsets.all(Responsive.width(context, 12)),
       decoration: BoxDecoration(
         color: cardColor,
-        borderRadius: BorderRadius.circular(10.r),
+        borderRadius: BorderRadius.circular(Responsive.radius(context, 10)),
         border: Border.all(color: AppColor.outlineSoft),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildProfileImage(),
-          SizedBox(width: 12.w),
+          _buildProfileImage(context),
+          SizedBox(width: Responsive.width(context, 12)),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildNameAndRating(),
-                SizedBox(height: 3.h),
+                _buildNameAndRating(context),
+                SizedBox(height: Responsive.height(context, 3)),
                 Text(
                   trainer.specialty,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: blueColor,
-                    fontSize: 12.sp,
+                    fontSize: Responsive.font(context, 12),
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                SizedBox(height: 8.h),
-                _buildInfoRow(),
-                SizedBox(height: 8.h),
-                _buildProfileButton(),
+                SizedBox(height: Responsive.height(context, 8)),
+                _buildInfoRow(context),
+                SizedBox(height: Responsive.height(context, 8)),
+                _buildProfileButton(context),
               ],
             ),
           ),
@@ -58,19 +57,19 @@ class TrainerCardWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildProfileImage() {
+  Widget _buildProfileImage(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(7.r),
+      borderRadius: BorderRadius.circular(Responsive.radius(context, 7)),
       child: SizedBox(
-        width: 68.w,
-        height: 68.h,
+        width: Responsive.width(context, 68),
+        height: Responsive.height(context, 68),
         child: trainer.imageUrl.isEmpty
             ? Container(
                 color: AppColor.surfaceElevated,
                 child: Icon(
                   Icons.person,
                   color: AppColor.textSecondary,
-                  size: 30.sp,
+                  size: Responsive.font(context, 30),
                 ),
               )
             : Image.network(
@@ -82,7 +81,7 @@ class TrainerCardWidget extends StatelessWidget {
                     child: Icon(
                       Icons.person,
                       color: AppColor.textSecondary,
-                      size: 30.sp,
+                      size: Responsive.font(context, 30),
                     ),
                   );
                 },
@@ -95,8 +94,8 @@ class TrainerCardWidget extends StatelessWidget {
                     color: AppColor.surfaceElevated,
                     alignment: Alignment.center,
                     child: SizedBox(
-                      width: 18.w,
-                      height: 18.h,
+                      width: Responsive.width(context, 18),
+                      height: Responsive.height(context, 18),
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
                         color: blueColor,
@@ -109,7 +108,7 @@ class TrainerCardWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildNameAndRating() {
+  Widget _buildNameAndRating(BuildContext context) {
     return Row(
       children: [
         Expanded(
@@ -124,23 +123,30 @@ class TrainerCardWidget extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: 6.w),
+        SizedBox(width: Responsive.width(context, 6)),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 3.h),
+          padding: EdgeInsets.symmetric(
+            horizontal: Responsive.width(context, 6),
+            vertical: Responsive.height(context, 3),
+          ),
           decoration: BoxDecoration(
             color: AppColor.primaryContainer,
-            borderRadius: BorderRadius.circular(4.r),
+            borderRadius: BorderRadius.circular(Responsive.radius(context, 4)),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.star, color: blueColor, size: 11.sp),
-              SizedBox(width: 2.w),
+              Icon(
+                Icons.star,
+                color: blueColor,
+                size: Responsive.font(context, 11),
+              ),
+              SizedBox(width: Responsive.width(context, 2)),
               Text(
                 trainer.rating.toStringAsFixed(1),
                 style: TextStyle(
                   color: blueColor,
-                  fontSize: 10.sp,
+                  fontSize: Responsive.font(context, 10),
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -151,38 +157,51 @@ class TrainerCardWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildInfoRow() {
+  Widget _buildInfoRow(BuildContext context) {
     return Row(
       children: [
         Icon(
           Icons.access_time_outlined,
           color: secondaryTextColor,
-          size: 13.sp,
+          size: Responsive.font(context, 13),
         ),
-        SizedBox(width: 3.w),
+        SizedBox(width: Responsive.width(context, 3)),
         Text(
           '${trainer.yearsExp} yrs exp',
-          style: TextStyle(color: secondaryTextColor, fontSize: 9.5.sp),
+          style: TextStyle(
+            color: secondaryTextColor,
+            fontSize: Responsive.font(context, 9.5),
+          ),
         ),
-        SizedBox(width: 12.w),
-        Icon(Icons.people_outline, color: secondaryTextColor, size: 13.sp),
-        SizedBox(width: 3.w),
+        SizedBox(width: Responsive.width(context, 12)),
+        Icon(
+          Icons.people_outline,
+          color: secondaryTextColor,
+          size: Responsive.font(context, 13),
+        ),
+        SizedBox(width: Responsive.width(context, 3)),
         Text(
           '${trainer.clientsCount}+ clients',
-          style: TextStyle(color: secondaryTextColor, fontSize: 9.5.sp),
+          style: TextStyle(
+            color: secondaryTextColor,
+            fontSize: Responsive.font(context, 9.5),
+          ),
         ),
       ],
     );
   }
 
-  Widget _buildProfileButton() {
+  Widget _buildProfileButton(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: Responsive.width(context, 10),
+          vertical: Responsive.height(context, 6),
+        ),
         decoration: BoxDecoration(
           color: buttonColor,
-          borderRadius: BorderRadius.circular(6.r),
+          borderRadius: BorderRadius.circular(Responsive.radius(context, 6)),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -191,15 +210,15 @@ class TrainerCardWidget extends StatelessWidget {
               'View Profile',
               style: TextStyle(
                 color: AppColor.textPrimary,
-                fontSize: 10.sp,
+                fontSize: Responsive.font(context, 10),
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(width: 4.w),
+            SizedBox(width: Responsive.width(context, 4)),
             Icon(
               Icons.chevron_right,
               color: AppColor.textSecondary,
-              size: 14.sp,
+              size: Responsive.font(context, 14),
             ),
           ],
         ),

@@ -1,6 +1,6 @@
- import 'package:fitmate/core/themes/app_color.dart';
+import 'package:fitmate/core/common/responsive/responsive.dart';
+import 'package:fitmate/core/themes/app_color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomEmptyWidget extends StatelessWidget {
   const CustomEmptyWidget({super.key});
@@ -10,7 +10,10 @@ class CustomEmptyWidget extends StatelessWidget {
     return Center(
       child: Text(
         'No trainers found',
-        style: TextStyle(color: AppColor.textBody, fontSize: 14.sp),
+        style: TextStyle(
+          color: AppColor.textBody,
+          fontSize: Responsive.font(context, 14),
+        ),
       ),
     );
   }
