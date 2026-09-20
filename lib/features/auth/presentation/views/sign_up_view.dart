@@ -1,5 +1,5 @@
+import 'package:fitmate/core/constants/app_strings.dart';
 import 'package:fitmate/core/common/utils/app_validator.dart';
-import 'package:fitmate/core/extensions/screen_context_extension.dart';
 import 'package:fitmate/core/extensions/snack_bar_context_extension.dart';
 import 'package:fitmate/core/routing/routes.dart';
 import 'package:fitmate/features/auth/presentation/view_model/auth_cubit.dart';
@@ -7,10 +7,7 @@ import 'package:fitmate/features/auth/presentation/view_model/auth_state.dart';
 import 'package:fitmate/features/auth/presentation/views/widgets/auth_page_header.dart';
 import 'package:fitmate/features/auth/presentation/views/widgets/auth_scaffold.dart';
 import 'package:fitmate/features/auth/presentation/views/widgets/auth_submit_button.dart';
-import 'package:fitmate/features/auth/presentation/views/widgets/auth_text_field.dart';
-import 'package:fitmate/features/auth/presentation/views/widgets/password_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpView extends StatefulWidget {
@@ -24,6 +21,7 @@ class _SignUpViewState extends State<SignUpView> {
   final _name = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
+  final _obscurePassword = ValueNotifier<bool>(true);
   void _submit() {
     final cubit = context.read<AuthCubit>();
     if (!(_formKey.currentState?.validate() ?? false)) return;
@@ -40,6 +38,7 @@ class _SignUpViewState extends State<SignUpView> {
     _name.dispose();
     _email.dispose();
     _password.dispose();
+    _obscurePassword.dispose();
     super.dispose();
   }
 
@@ -71,36 +70,76 @@ class _SignUpViewState extends State<SignUpView> {
             children: [
               const AuthPageHeader(isSignUp: true),
               const SizedBox(height: 48),
-              AuthTextField(
+              Text(
+                AppStrings.fullName,
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+              const SizedBox(height: 8),
+              TextFormField(
+                textInputAction: TextInputAction.next,
                 controller: _name,
-                labelText: 'Full Name',
-                hintText: 'Enter your name',
                 textCapitalization: TextCapitalization.words,
                 autofillHints: const [AutofillHints.name],
                 validator: AppValidator.fullName,
-                fillColor: Theme.of(context).colorScheme.surface,
+                decoration: const InputDecoration(
+                  hintText: AppStrings.enterYourName,
+                ),
               ),
               const SizedBox(height: 18),
-              AuthTextField(
+              Text(
+                AppStrings.emailAddress,
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+              const SizedBox(height: 8),
+              TextFormField(
+                textInputAction: TextInputAction.next,
                 controller: _email,
-                labelText: 'Email Address',
-                hintText: 'Enter your email',
                 keyboardType: TextInputType.emailAddress,
                 autofillHints: const [AutofillHints.email],
                 validator: AppValidator.email,
-                fillColor: Theme.of(context).colorScheme.surface,
+                decoration: const InputDecoration(
+                  hintText: AppStrings.enterYourEmail,
+                ),
               ),
               const SizedBox(height: 18),
-              PasswordTextField(
-                controller: _password,
-                hintText: 'Create a password',
-                validator: AppValidator.password,
-                isNewPassword: true,
-                fillColor: context.theme.colorScheme.surface,
-                onFieldSubmitted: (_) => _submit(),
+              Text(
+                AppStrings.password,
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+              const SizedBox(height: 8),
+              ValueListenableBuilder<bool>(
+                valueListenable: _obscurePassword,
+                builder: (context, obscurePassword, child) => TextFormField(
+                  controller: _password,
+                  obscureText: obscurePassword,
+                  validator: AppValidator.password,
+                  textInputAction: TextInputAction.done,
+                  autofillHints: const [AutofillHints.newPassword],
+                  autocorrect: false,
+                  enableSuggestions: false,
+                  onFieldSubmitted: (_) => _submit(),
+                  decoration: InputDecoration(
+                    hintText: AppStrings.createAPassword,
+                    suffixIcon: IconButton(
+                      onPressed: () =>
+                          _obscurePassword.value = !obscurePassword,
+                      tooltip: obscurePassword
+                          ? AppStrings.showPassword
+                          : AppStrings.hidePassword,
+                      icon: Icon(
+                        obscurePassword
+                            ? Icons.visibility_outlined
+                            : Icons.visibility_off_outlined,
+                      ),
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(height: 24),
-              AuthSubmitButton(label: 'Create Account', onPressed: _submit),
+              AuthSubmitButton(
+                label: AppStrings.createAccount,
+                onPressed: _submit,
+              ),
               const SizedBox(height: 28),
               const SizedBox(height: 24),
               Wrap(
@@ -108,14 +147,14 @@ class _SignUpViewState extends State<SignUpView> {
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   Text(
-                    'Already have an account?',
+                    AppStrings.alreadyHaveAnAccount,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   TextButton(
                     onPressed: () => Navigator.of(
                       context,
                     ).pushReplacementNamed(Routes.login),
-                    child: const Text('Log in'),
+                    child: const Text(AppStrings.logInLink),
                   ),
                 ],
               ),

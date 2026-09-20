@@ -1,3 +1,4 @@
+import 'package:fitmate/core/constants/app_strings.dart';
 import 'package:fitmate/core/routing/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +8,7 @@ class AuthBackButton extends StatelessWidget {
   final Color? color;
   @override
   Widget build(BuildContext context) => IconButton(
-    tooltip: 'Back',
+    tooltip: AppStrings.back,
     color: color,
     icon: const Icon(Icons.arrow_back),
     onPressed:

@@ -1,3 +1,4 @@
+import 'package:fitmate/core/constants/app_strings.dart';
 import 'package:fitmate/core/constants/auth_redirects.dart';
 import 'package:fitmate/features/auth/data/models/auth_account.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -16,7 +17,7 @@ class AuthRemoteDataSource {
     );
     if (response.session == null) {
       throw const AuthException(
-        'No session returned.',
+        AppStrings.noSessionReturned,
         code: 'session_not_found',
       );
     }

@@ -1,3 +1,4 @@
+import 'package:fitmate/core/constants/app_strings.dart';
 import 'package:fitmate/features/MainHome/data/models/navigation_item_model.dart';
 import 'package:fitmate/features/MainHome/presentation/view_model/main_home_cubit.dart';
 import 'package:flutter/material.dart';
@@ -8,37 +9,37 @@ class MainHomeView extends StatelessWidget {
 
   static final List<NavigationItemModel> _items = [
     NavigationItemModel(
-      label: 'Home',
+      label: AppStrings.home,
       icon: Icons.home_outlined,
       selectedIcon: Icons.home_rounded,
       page: Placeholder(),
     ),
     NavigationItemModel(
-      label: 'Trainers',
+      label: AppStrings.trainers,
       icon: Icons.shopping_cart_outlined,
       selectedIcon: Icons.shopping_cart_rounded,
       page: Placeholder(),
     ),
     NavigationItemModel(
-      label: 'Plans',
+      label: AppStrings.plans,
       icon: Icons.favorite_border_rounded,
       selectedIcon: Icons.favorite_rounded,
       page: Placeholder(),
     ),
     NavigationItemModel(
-      label: 'Favorites',
+      label: AppStrings.favorites,
       icon: Icons.menu_rounded,
       selectedIcon: Icons.menu_open_rounded,
       page: Placeholder(),
     ),
     NavigationItemModel(
-      label: 'Favorites',
+      label: AppStrings.favorites,
       icon: Icons.menu_rounded,
       selectedIcon: Icons.menu_open_rounded,
       page: Placeholder(),
     ),
     NavigationItemModel(
-      label: 'Profile',
+      label: AppStrings.profile,
       icon: Icons.menu_rounded,
       selectedIcon: Icons.menu_open_rounded,
       page: Placeholder(),

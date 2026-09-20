@@ -1,3 +1,4 @@
+import 'package:fitmate/core/constants/app_strings.dart';
 import 'package:fitmate/core/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +36,7 @@ class AuthSubmitButton extends StatelessWidget {
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
                   color: Theme.of(context).colorScheme.onPrimary,
-                  semanticsLabel: 'Please wait',
+                  semanticsLabel: AppStrings.pleaseWait,
                 ),
               )
             : Text(label),

@@ -1,3 +1,5 @@
+import 'package:fitmate/core/constants/app_image.dart';
+import 'package:fitmate/core/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 
 class AuthPageHeader extends StatelessWidget {
@@ -14,7 +16,7 @@ class AuthPageHeader extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              Image.asset('assets/images/splash/gym.png', fit: BoxFit.cover),
+              Image.asset(AppImage.gym, fit: BoxFit.cover),
               if (isSignUp)
                 Align(
                   alignment: Alignment.bottomCenter,
@@ -24,7 +26,7 @@ class AuthPageHeader extends StatelessWidget {
                       vertical: 4,
                     ),
                     child: Text(
-                      'Join to the Forge',
+                      AppStrings.joinToTheForge,
                       textAlign: TextAlign.center,
                       style: text.displayMedium?.copyWith(color: Colors.white),
                     ),
@@ -36,7 +38,7 @@ class AuthPageHeader extends StatelessWidget {
         if (!isSignUp) ...[
           const SizedBox(height: 24),
           Text(
-            'Welcome Back',
+            AppStrings.welcomeBack,
             textAlign: TextAlign.center,
             style: text.headlineLarge,
           ),
@@ -44,8 +46,8 @@ class AuthPageHeader extends StatelessWidget {
         ],
         Text(
           isSignUp
-              ? 'Start your transformation journey today.'
-              : 'Fuel your progress. Log in to your pulse.',
+              ? AppStrings.startYourTransformationJourneyToday
+              : AppStrings.fuelYourProgressLogInToYourPulse,
           textAlign: TextAlign.center,
           style: text.bodyLarge?.copyWith(
             color: isSignUp

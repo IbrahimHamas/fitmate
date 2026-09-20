@@ -1,3 +1,4 @@
+import 'package:fitmate/core/constants/app_strings.dart';
 import 'dart:async';
 import 'package:fitmate/features/auth/data/repositories/auth_repository.dart';
 import 'package:fitmate/features/auth/presentation/view_model/auth_state.dart';
@@ -14,7 +15,7 @@ class AuthCubit extends Cubit<AuthState> {
 
     response.fold(
       (failure) => emit(LoginFailure(errorMessage: failure.message)),
-      (authResult) => emit(LoginSuccess(message: 'Logged in successfully.')),
+      (authResult) => emit(LoginSuccess(message: AppStrings.loggedInSuccessfully)),
     );
   }
 
@@ -33,7 +34,7 @@ class AuthCubit extends Cubit<AuthState> {
     response.fold(
       (failure) => emit(SignUpFailure(errorMessage: failure.message)),
       (authResult) =>
-          emit(SignUpSuccess(message: 'Account created successfully')),
+          emit(SignUpSuccess(message: AppStrings.accountCreatedSuccessfully)),
     );
   }
 
@@ -43,7 +44,7 @@ class AuthCubit extends Cubit<AuthState> {
 
     response.fold(
       (failure) => emit(SignOutFailure(errorMessage: failure.message)),
-      (_) => emit(SignOutSuccess(message: 'Logged out successfully.')),
+      (_) => emit(SignOutSuccess(message: AppStrings.loggedOutSuccessfully)),
     );
   }
 }

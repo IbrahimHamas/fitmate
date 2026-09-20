@@ -1,3 +1,4 @@
+import 'package:fitmate/core/constants/app_strings.dart';
 import 'package:fitmate/core/common/utils/app_validator.dart';
 import 'package:fitmate/core/extensions/snack_bar_context_extension.dart';
 import 'package:fitmate/core/routing/routes.dart';
@@ -6,8 +7,6 @@ import 'package:fitmate/features/auth/presentation/view_model/auth_state.dart';
 import 'package:fitmate/features/auth/presentation/views/widgets/auth_page_header.dart';
 import 'package:fitmate/features/auth/presentation/views/widgets/auth_scaffold.dart';
 import 'package:fitmate/features/auth/presentation/views/widgets/auth_submit_button.dart';
-import 'package:fitmate/features/auth/presentation/views/widgets/auth_text_field.dart';
-import 'package:fitmate/features/auth/presentation/views/widgets/password_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,6 +20,7 @@ class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
   final _email = TextEditingController();
   final _password = TextEditingController();
+  final _obscurePassword = ValueNotifier<bool>(true);
 
   void _submit() {
     final cubit = context.read<AuthCubit>();
@@ -33,6 +33,7 @@ class _LoginViewState extends State<LoginView> {
   void dispose() {
     _email.dispose();
     _password.dispose();
+    _obscurePassword.dispose();
     super.dispose();
   }
 
@@ -60,25 +61,60 @@ class _LoginViewState extends State<LoginView> {
             children: [
               const AuthPageHeader(),
               const SizedBox(height: 36),
-              AuthTextField(
+              Text(
+                AppStrings.emailAddress,
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+              const SizedBox(height: 8),
+              TextFormField(
+                textInputAction: TextInputAction.next,
                 controller: _email,
-                labelText: 'Email Address',
-                hintText: 'Enter your email',
                 keyboardType: TextInputType.emailAddress,
                 autofillHints: const [AutofillHints.email],
                 validator: AppValidator.email,
-                prefixIcon: const Icon(Icons.mail_outline),
+                decoration: const InputDecoration(
+                  hintText: AppStrings.enterYourEmail,
+                  prefixIcon: Icon(Icons.mail_outline),
+                ),
               ),
               const SizedBox(height: 18),
-              PasswordTextField(
-                controller: _password,
-                validator: AppValidator.loginPassword,
-                showLockIcon: true,
-                onFieldSubmitted: (_) => _submit(),
+              Text(
+                AppStrings.password,
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+              const SizedBox(height: 8),
+              ValueListenableBuilder<bool>(
+                valueListenable: _obscurePassword,
+                builder: (context, obscurePassword, child) => TextFormField(
+                  controller: _password,
+                  obscureText: obscurePassword,
+                  validator: AppValidator.requiredField,
+                  textInputAction: TextInputAction.done,
+                  autofillHints: const [AutofillHints.password],
+                  autocorrect: false,
+                  enableSuggestions: false,
+                  onFieldSubmitted: (_) => _submit(),
+                  decoration: InputDecoration(
+                    hintText: AppStrings.enterYourPassword,
+                    prefixIcon: const Icon(Icons.lock_outline),
+                    suffixIcon: IconButton(
+                      onPressed: () =>
+                          _obscurePassword.value = !obscurePassword,
+                      tooltip: obscurePassword
+                          ? AppStrings.showPassword
+                          : AppStrings.hidePassword,
+                      icon: Icon(
+                        obscurePassword
+                            ? Icons.visibility_outlined
+                            : Icons.visibility_off_outlined,
+                      ),
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(height: 12),
               AuthSubmitButton(
-                label: 'Log In',
+                label: AppStrings.logIn,
                 onPressed: _submit,
                 gradient: true,
               ),
@@ -89,14 +125,14 @@ class _LoginViewState extends State<LoginView> {
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   Text(
-                    "Don't have an account?",
+                    AppStrings.dontHaveAnAccount,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   TextButton(
                     onPressed: () => Navigator.of(
                       context,
                     ).pushReplacementNamed(Routes.signUp),
-                    child: const Text('Sign Up'),
+                    child: const Text(AppStrings.signUp),
                   ),
                 ],
               ),

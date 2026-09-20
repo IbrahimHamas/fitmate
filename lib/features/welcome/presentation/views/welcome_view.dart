@@ -1,3 +1,5 @@
+import 'package:fitmate/core/constants/app_image.dart';
+import 'package:fitmate/core/constants/app_strings.dart';
 import 'package:fitmate/core/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,11 +22,11 @@ class WelcomeView extends StatelessWidget {
           centerTitle: true,
           leading: IconButton(
             onPressed: onClose,
-            tooltip: 'Close',
+            tooltip: AppStrings.close,
             disabledColor: theme.colorScheme.onSurface,
             icon: const Icon(Icons.close, size: 24),
           ),
-          title: const Text('IronPulse'),
+          title: const Text(AppStrings.appName),
         ),
         body: SafeArea(
           top: false,
@@ -34,7 +36,7 @@ class WelcomeView extends StatelessWidget {
                   constraints.maxWidth > constraints.maxHeight &&
                   constraints.maxHeight < 600;
               final photo = Image.asset(
-                'assets/images/welcome/runner.jpg',
+                AppImage.runner,
                 fit: BoxFit.cover,
                 alignment: Alignment.center,
                 excludeFromSemantics: true,
@@ -95,13 +97,13 @@ class _WelcomeContent extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    'Welcome to\nIronPulse',
+                    AppStrings.welcomeToIronPulse,
                     textAlign: TextAlign.center,
                     style: theme.textTheme.headlineLarge,
                   ),
                   const SizedBox(height: 18),
                   Text(
-                    'Fuel your progress. Your journey to elite performance starts here.',
+                    AppStrings.welcomeDescription,
                     textAlign: TextAlign.center,
                     style: theme.textTheme.bodyLarge?.copyWith(
                       fontSize: 18,
@@ -125,7 +127,7 @@ class _WelcomeContent extends StatelessWidget {
                         disabledBackgroundColor: colors.primary,
                         disabledForegroundColor: colors.onPrimary,
                       ),
-                      child: const Text('Get Started'),
+                      child: const Text(AppStrings.getStarted),
                     ),
                   ),
                   const SizedBox(height: 40),
