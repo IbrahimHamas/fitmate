@@ -1,26 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:fitmate/core/services/errors/failure.dart';
 import 'package:fitmate/core/services/request_handler.dart';
-import 'package:fitmate/core/networking/supabase_helper.dart';
-
-
+import '../data_sources/all_trainers_remote_data_source.dart';
 import '../models/trainer_model.dart';
 
 class TrainersRepository {
-  final SupabaseHelper supabaseHelper;
+  final AllTrainersRemoteDataSource remoteDataSource;
 
-  TrainersRepository({required this.supabaseHelper});
+  TrainersRepository({required this.remoteDataSource});
 
-  Future<Either<Failure, List<TrainerModel>>> getTrainers() async {
-    return requestHandler(() async {
-      final response = await supabaseHelper.getData(tableName: 'trainers');
-
-      return (response as List)
-          .map(
-            (trainer) =>
-                TrainerModel.fromJson(Map<String, dynamic>.from(trainer)),
-          )
-          .toList();
-    });
-  }
+  Future<Either<Failure, List<TrainerModel>>> getTrainers() =>
+      requestHandler(remoteDataSource.getTrainers);
 }
