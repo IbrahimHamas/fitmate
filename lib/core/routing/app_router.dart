@@ -1,5 +1,6 @@
 import 'package:fitmate/core/dependency_injection/injection_container.dart';
 import 'package:fitmate/core/routing/routes.dart';
+import 'package:fitmate/features/plan_details/presentation/views/plan_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,8 +38,8 @@ class AppRouter {
             ),
           ),
         );
-
-      //plan details
+*/
+      //  plan details
       case Routes.planDetails:
         return MaterialPageRoute(builder: (_) => PlanDetails());
 
@@ -48,7 +49,6 @@ class AppRouter {
             body: Center(child: Text('No route defined for ${settings.name}')),
           ),
         );
-        */
     }
   }
 }
