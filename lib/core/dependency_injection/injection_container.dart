@@ -1,3 +1,6 @@
+import 'package:fitmate/core/features/work_out_plans/data/data_sources/work_out_plans_remote_data_sources.dart';
+import 'package:fitmate/core/features/work_out_plans/data/repos/work_out_plans_repository.dart';
+import 'package:fitmate/core/features/work_out_plans/presentation/view_model/cubit/work_out_plans_cubit.dart';
 import 'package:fitmate/core/services/shared_preferences_service.dart';
 import 'package:fitmate/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:fitmate/features/auth/data/repositories/auth_repository.dart';
@@ -12,6 +15,16 @@ Future<void> initDependencies() async {
   sl.registerLazySingleton<SupabaseClient>(() => Supabase.instance.client);
   sl.registerLazySingleton<SharedPreferencesService>(
     () => SharedPreferencesService(),
+  );
+
+  sl.registerLazySingleton<WorkoutPlansRemoteDataSource>(
+    () => WorkoutPlansRemoteDataSource(sl<SupabaseClient>()),
+  );
+  sl.registerLazySingleton<WorkoutPlansRepository>(
+    () => WorkoutPlansRepository(sl<WorkoutPlansRemoteDataSource>()),
+  );
+  sl.registerFactory<WorkoutPlansCubit>(
+    () => WorkoutPlansCubit(sl<WorkoutPlansRepository>()),
   );
 
   if (!sl.isRegistered<AuthRemoteDataSource>()) {
