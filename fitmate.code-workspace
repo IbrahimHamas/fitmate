@@ -1,0 +1,11 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "dart.flutterSdkPath": "C:/flutter",
+    "dart.projectSearchDepth": 10
+  }
+}

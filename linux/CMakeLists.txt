@@ -4,17 +4,10 @@ project(runner LANGUAGES CXX)
 
 # The name of the executable created for the application. Change this to change
 # the on-disk name of your application.
-<<<<<<< HEAD
-set(BINARY_NAME "fit_up")
-# The unique GTK application identifier for this application. See:
-# https://wiki.gnome.org/HowDoI/ChooseApplicationID
-set(APPLICATION_ID "com.example.fit_up")
-=======
 set(BINARY_NAME "fitmate")
 # The unique GTK application identifier for this application. See:
 # https://wiki.gnome.org/HowDoI/ChooseApplicationID
 set(APPLICATION_ID "com.example.fitmate")
->>>>>>> 14fbf8fe3aa7a9967b7891032dfaf458a0071789
 
 # Explicitly opt in to modern CMake behaviors to avoid warnings with recent
 # versions of CMake.

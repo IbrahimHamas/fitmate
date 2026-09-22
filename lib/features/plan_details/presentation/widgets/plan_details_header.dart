@@ -1,3 +1,4 @@
+import 'package:fitmate/core/constants/app_strings.dart';
 import 'dart:ui';
 
 import 'package:fitmate/core/themes/app_color.dart';
@@ -35,7 +36,7 @@ class PlanDetailsHeader extends StatelessWidget implements PreferredSizeWidget {
                 size: 16,
               ),
               Text(
-                "Plan Details",
+                AppStrings.planDetails,
                 textAlign: TextAlign.center,
                 style: textTheme.titleMedium!.copyWith(
                   height: 1.25,

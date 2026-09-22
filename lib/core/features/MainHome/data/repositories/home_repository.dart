@@ -1,3 +1,0 @@
-class MainHomeRepository {
-  const MainHomeRepository();
-}

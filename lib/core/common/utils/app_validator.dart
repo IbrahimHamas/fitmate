@@ -81,7 +81,10 @@ abstract final class AppValidator {
   }
 
   static String? confirmPassword(String? value, String password) {
-    final requiredError = requiredField(value, field: AppStrings.confirmPassword);
+    final requiredError = requiredField(
+      value,
+      field: AppStrings.confirmPassword,
+    );
     if (requiredError != null) return requiredError;
     if (value != password) return AppStrings.passwordsDoNotMatch;
     return null;

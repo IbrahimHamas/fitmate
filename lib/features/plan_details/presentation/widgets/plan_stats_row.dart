@@ -1,3 +1,4 @@
+import 'package:fitmate/core/constants/app_strings.dart';
 import 'package:fitmate/features/plan_details/presentation/widgets/stats_card.dart';
 import 'package:flutter/material.dart';
 
@@ -14,22 +15,22 @@ class PlanStatsRow extends StatelessWidget {
           StatCard(
             textTheme: textTheme,
             icon: Icons.timer_outlined,
-            textone: "Duration",
-            texttwo: "60-90m",
+            textone: AppStrings.duration,
+            texttwo: AppStrings.sixtyToNinetyMinutes,
           ),
           SizedBox(width: 16),
           StatCard(
             textTheme: textTheme,
             icon: Icons.fitness_center,
-            textone: 'Frequency',
-            texttwo: '5 Days/Wk',
+            textone: AppStrings.frequency,
+            texttwo: AppStrings.fiveDaysPerWeek,
           ),
           SizedBox(width: 16),
           StatCard(
             textTheme: textTheme,
             icon: Icons.local_fire_department,
-            textone: 'Intensity',
-            texttwo: 'High',
+            textone: AppStrings.intensity,
+            texttwo: AppStrings.high,
           ),
         ],
       ),

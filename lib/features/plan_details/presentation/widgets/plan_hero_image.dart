@@ -1,3 +1,4 @@
+import 'package:fitmate/core/constants/app_image.dart';
 import 'package:flutter/material.dart';
 
 class PlanHeroImage extends StatelessWidget {
@@ -14,7 +15,7 @@ class PlanHeroImage extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.asset(
-                "assets/alpha-strength.png",
+                AppImage.alphaStrength,
                 width: double.infinity,
                 height: double.infinity,
                 fit: BoxFit.cover,

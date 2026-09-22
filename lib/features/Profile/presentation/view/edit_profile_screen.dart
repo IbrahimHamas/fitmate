@@ -1,3 +1,4 @@
+import 'package:fitmate/core/constants/app_strings.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,7 +76,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Profile'),
+        title: const Text(AppStrings.editProfile),
         centerTitle: true,
         elevation: 0,
       ),
@@ -146,7 +147,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     controller: _nameController,
                     style: const TextStyle(color: Colors.white),
                     decoration: const InputDecoration(
-                      labelText: 'Full Name',
+                      labelText: AppStrings.fullName,
                       labelStyle: TextStyle(color: Colors.white70),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white24),
@@ -156,7 +157,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                     ),
                     validator: (value) => value == null || value.trim().isEmpty
-                        ? 'Please enter your name'
+                        ? AppStrings.pleaseEnterYourName
                         : null,
                   ),
                   const SizedBox(height: 16),
@@ -164,7 +165,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     controller: _emailController,
                     style: const TextStyle(color: Colors.white),
                     decoration: const InputDecoration(
-                      labelText: 'Email',
+                      labelText: AppStrings.email,
                       labelStyle: TextStyle(color: Colors.white70),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white24),
@@ -180,7 +181,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     keyboardType: TextInputType.phone,
                     style: const TextStyle(color: Colors.white),
                     decoration: const InputDecoration(
-                      labelText: 'Phone Number',
+                      labelText: AppStrings.phoneNumberLabel,
                       labelStyle: TextStyle(color: Colors.white70),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white24),
@@ -205,7 +206,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       child: isLoading
                           ? const CircularProgressIndicator(color: Colors.white)
                           : const Text(
-                              'Save Changes',
+                              AppStrings.saveChanges,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,

@@ -1,13 +1,14 @@
+import 'package:fitmate/core/constants/app_strings.dart';
+import 'package:fitmate/features/MainHome/presentation/view_model/main_home_cubit.dart';
+import 'package:fitmate/features/MainHome/presentation/views/main_home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:fitmate/core/dependency_injection/injection_container.dart';
-import 'package:fitmate/core/features/MainHome/presentation/view_model/main_home_cubit.dart';
-import 'package:fitmate/core/features/MainHome/presentation/views/main_home_view.dart';
-import 'package:fitmate/core/features/all_trainers/presentation/view/trainers_view.dart';
-import 'package:fitmate/core/features/all_trainers/presentation/view_model/cubit/trainers_cubit.dart';
-import 'package:fitmate/core/features/work_out_plans/presentation/view/workout_plans_view.dart';
-import 'package:fitmate/core/features/work_out_plans/presentation/view_model/cubit/work_out_plans_cubit.dart';
+import 'package:fitmate/features/all_trainers/presentation/view/trainers_view.dart';
+import 'package:fitmate/features/all_trainers/presentation/view_model/cubit/trainers_cubit.dart';
+import 'package:fitmate/features/work_out_plans/presentation/view/workout_plans_view.dart';
+import 'package:fitmate/features/work_out_plans/presentation/view_model/cubit/work_out_plans_cubit.dart';
 import 'package:fitmate/core/routing/routes.dart';
 import 'package:fitmate/features/profile/data/models/profile_model.dart';
 import 'package:fitmate/features/profile/presentation/view/edit_profile_screen.dart';
@@ -79,8 +80,13 @@ class AppRouter {
       case Routes.home:
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => BlocProvider(
-            create: (_) => MainHomeCubit(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (_) => MainHomeCubit()),
+              BlocProvider(create: (_) => sl<WorkoutPlansCubit>()),
+              BlocProvider(create: (_) => sl<TrainersCubit>()),
+              BlocProvider(create: (_) => sl<ProfileCubit>()..getProfile()),
+            ],
             child: const MainHomeView(),
           ),
         );
@@ -107,7 +113,7 @@ class AppRouter {
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
-            body: Center(child: Text('No route defined for ${settings.name}')),
+            body: Center(child: Text(AppStrings.noRouteDefined(settings.name))),
           ),
         );
     }
