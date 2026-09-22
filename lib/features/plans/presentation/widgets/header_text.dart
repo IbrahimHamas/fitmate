@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 class HeaderText extends StatelessWidget {
-  const HeaderText({super.key, required this.textTheme});
-
-  final TextTheme textTheme;
+  const HeaderText({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Container(
       width: double.infinity,
       alignment: Alignment.centerLeft,

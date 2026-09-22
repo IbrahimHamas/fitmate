@@ -4,12 +4,11 @@ import 'package:fitmate/core/themes/app_color.dart';
 import 'package:flutter/material.dart';
 
 class PlanCard extends StatelessWidget {
-  const PlanCard({super.key, required this.textTheme});
-
-  final TextTheme textTheme;
+  const PlanCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Stack(
       children: [
         SizedBox(
@@ -17,12 +16,12 @@ class PlanCard extends StatelessWidget {
           child: Card(
             clipBehavior: Clip.antiAlias,
             margin: EdgeInsets.zero,
-            color: Color(0XFF1E293B),
+            color: AppColor.outlineSoft,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
               side: BorderSide(
                 width: 1,
-                color: Color(0x00000000),
+                color: AppColor.scrim,
                 strokeAlign: BorderSide.strokeAlignInside,
               ),
             ),

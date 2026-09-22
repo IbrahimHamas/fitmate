@@ -1,16 +1,14 @@
-import 'package:fitmate/core/themes/app_theme.dart';
 import 'package:fitmate/features/plans/presentation/widgets/app_header.dart';
 import 'package:fitmate/features/plans/presentation/widgets/header_text.dart';
 import 'package:fitmate/features/plans/presentation/widgets/plan_card.dart';
 import 'package:flutter/material.dart';
 
 class PlansPage extends StatelessWidget {
-  PlansPage({super.key});
-
-  final textTheme = AppTheme.darkTheme.textTheme;
+  const PlansPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppHeader(),
       body: SafeArea(
@@ -21,12 +19,12 @@ class PlansPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                HeaderText(textTheme: textTheme),
+                HeaderText(),
                 SizedBox(height: 32),
                 Expanded(
                   child: ListView.separated(
                     itemBuilder: (BuildContext context, int index) =>
-                        PlanCard(textTheme: textTheme),
+                        PlanCard(),
                     separatorBuilder: (BuildContext context, _) =>
                         SizedBox(height: 32),
                     itemCount: 4,
