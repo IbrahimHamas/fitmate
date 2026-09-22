@@ -8,4 +8,8 @@ class SupabaseHelper {
   static Future<void> init() async {
     await Supabase.initialize(url: projectUrl, publishableKey: publishableKey);
   }
+
+  Future<dynamic> getData({required String tableName}) async {
+    return await Supabase.instance.client.from(tableName).select();
+  }
 }

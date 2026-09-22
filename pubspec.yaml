@@ -1,41 +1,49 @@
 name: fitmate
 description: "A new Flutter project."
-publish_to: 'none' 
+
+
+publish_to: 'none'
 
 version: 1.0.0+1
 
 environment:
   sdk: ">=3.10.4 <4.0.0"
+
+
 dependencies:
   flutter:
     sdk: flutter
-
   cupertino_icons: ^1.0.8
   supabase_flutter: ^2.17.2
   shared_preferences: ^2.5.5
   get_it: ^9.2.1
   flutter_bloc: ^9.1.1
   dartz: ^0.10.1
-  equatable: ^2.1.0
-  image_picker: ^1.0.7 
-  
+
+  equatable: ^3.0.0
+  image_picker: ^1.2.3
+  shared_preferences: ^2.5.5
+  flutter_native_splash: ^2.4.0
+  flutter_svg: ^2.3.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^6.0.0
 
 flutter:
-
   uses-material-design: true
 
   assets:
     - assets/fonts/Lexend-OFL.txt
+    - assets/images/splash/gym.png
+    - assets/images/splash/native_artwork.png
+    - assets/images/splash/native_logo_android12.png
+    - assets/images/welcome/runner.jpg
+    - assets/alpha-strength.png
 
   fonts:
     - family: Lexend
       fonts:
+
         - asset: assets/fonts/Lexend-Variable.ttf
-
- 
-

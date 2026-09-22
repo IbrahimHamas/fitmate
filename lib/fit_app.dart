@@ -1,11 +1,17 @@
 import 'package:fitmate/core/routing/app_router.dart';
-import 'package:fitmate/core/routing/navigator_key.dart';
+
+import 'package:fitmate/core/routing/navigator_key.dart' show NavigatorKey;
 import 'package:fitmate/core/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class FitApp extends StatelessWidget {
-  const FitApp({super.key, required this.initialRoute});
+  const FitApp({
+    super.key,
+    required this.appRouter,
+    required this.initialRoute,
+  });
 
+  final AppRouter appRouter;
   final String initialRoute;
 
   @override
@@ -14,7 +20,8 @@ class FitApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
       navigatorKey: NavigatorKey.navigatorKey,
-      onGenerateRoute: AppRouter.generateRoute,
+
+      onGenerateRoute: appRouter.generateRoute,
       initialRoute: initialRoute,
     );
   }
