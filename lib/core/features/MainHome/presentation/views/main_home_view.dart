@@ -2,6 +2,8 @@
 import 'package:fitmate/core/dependency_injection/injection_container.dart';
 import 'package:fitmate/core/features/MainHome/data/models/navigation_item_model.dart';
 import 'package:fitmate/core/features/MainHome/presentation/view_model/main_home_cubit.dart';
+import 'package:fitmate/core/features/all_trainers/presentation/view/trainers_view.dart';
+import 'package:fitmate/core/features/all_trainers/presentation/view_model/cubit/trainers_cubit.dart';
 import 'package:fitmate/core/features/work_out_plans/presentation/view/workout_plans_view.dart';
 import 'package:fitmate/core/features/work_out_plans/presentation/view_model/cubit/work_out_plans_cubit.dart';
 import 'package:fitmate/core/themes/app_color.dart';
@@ -22,15 +24,15 @@ class MainHomeView extends StatelessWidget {
         child: const WorkoutPlansView(),
       ),
     ),
-    // NavigationItemModel(
-    //   label: 'Trainers',
-    //   icon: SvgAssetLoader('assets/svgs/trainers_icon.svg'),
-    //   selectedIcon: SvgAssetLoader('assets/svgs/trainers_icon.svg'),
-    //   page: BlocProvider<TrainersCubit>(
-    //     create: (_) => sl<TrainersCubit>(),
-    //     child: const TrainersView(),
-    //   ),
-    // ),
+    NavigationItemModel(
+      label: 'Trainers',
+      icon: SvgAssetLoader('assets/svgs/trainers_icon.svg'),
+      selectedIcon: SvgAssetLoader('assets/svgs/trainers_icon.svg'),
+      page: BlocProvider<TrainersCubit>(
+        create: (_) => sl<TrainersCubit>(),
+        child: const TrainersView(),
+      ),
+    ),
     NavigationItemModel(
       label: 'Plans',
       icon: SvgAssetLoader('assets/svgs/plans.svg'),
