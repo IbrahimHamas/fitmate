@@ -1,5 +1,6 @@
 import 'package:fitmate/core/features/work_out_plans/presentation/view_model/cubit/work_out_plans_cubit.dart';
 import 'package:fitmate/core/features/work_out_plans/presentation/view_model/cubit/work_out_plans_state.dart';
+import 'package:fitmate/core/common/responsive/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,19 +25,26 @@ class _WorkoutPlansViewState extends State<WorkoutPlansView> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(
+            horizontal: Responsive.width(context, 16),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-            const  SizedBox(height: 16),
+              SizedBox(height: Responsive.height(context, 16)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.bolt, size: 28),
-                      SizedBox(width: 6),
-                      Text('IronPulse', style: TextStyle(fontSize: 14)),
+                      Icon(Icons.bolt, size: Responsive.font(context, 28)),
+                      SizedBox(width: Responsive.width(context, 6)),
+                      Text(
+                        'IronPulse',
+                        style: TextStyle(
+                          fontSize: Responsive.font(context, 14),
+                        ),
+                      ),
                     ],
                   ),
                   IconButton(
@@ -45,28 +53,35 @@ class _WorkoutPlansViewState extends State<WorkoutPlansView> {
                   ),
                 ],
               ),
-          const    SizedBox(height: 16),
+              SizedBox(height: Responsive.height(context, 16)),
               TextField(
                 decoration: InputDecoration(
                   hintText: 'Search workouts...',
                   prefixIcon: const Icon(Icons.search),
                 ),
               ),
-            const  SizedBox(height: 20),
+              SizedBox(height: Responsive.height(context, 20)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Featured Workout Plans',
-                    style: TextStyle(fontSize: 14),
+                  Flexible(
+                    child: Text(
+                      'Featured Workout Plans',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: Responsive.font(context, 14)),
+                    ),
                   ),
                   TextButton(
                     onPressed: () {},
-                    child: Text('See All', style: TextStyle(fontSize: 12)),
+                    child: Text(
+                      'See All',
+                      style: TextStyle(fontSize: Responsive.font(context, 12)),
+                    ),
                   ),
                 ],
               ),
-            const  SizedBox(height: 8),
+              SizedBox(height: Responsive.height(context, 8)),
               // Plans List
               Expanded(
                 child: BlocBuilder<WorkoutPlansCubit, WorkoutPlansState>(

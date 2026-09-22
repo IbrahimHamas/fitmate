@@ -1,3 +1,4 @@
+import 'package:fitmate/core/common/responsive/responsive.dart';
 import 'package:fitmate/core/features/work_out_plans/data/models/work_out_plans_model.dart';
 import 'package:fitmate/core/themes/app_color.dart';
 import 'package:flutter/material.dart';
@@ -23,42 +24,42 @@ class WorkoutPlanCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final imageWidth = Responsive.width(context, 120);
+    final levelColor = _getLevelColor(plan.level);
 
     return Container(
-      margin: EdgeInsets.only(bottom: 16),
-      height: 130,
+      margin: EdgeInsets.only(bottom: Responsive.height(context, 16)),
+      height: Responsive.height(context, 130),
       decoration: BoxDecoration(
         color: AppColor.surface,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(Responsive.radius(context, 16)),
       ),
       child: Row(
         children: [
-          // Image Section
           ClipRRect(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(16),
-              bottomLeft: Radius.circular(16),
+              topLeft: Radius.circular(Responsive.radius(context, 16)),
+              bottomLeft: Radius.circular(Responsive.radius(context, 16)),
             ),
             child: Image.network(
               plan.imageUrl,
-              width: 120,
+              width: imageWidth,
               height: double.infinity,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) => Container(
-                width: 120,
+                width: imageWidth,
                 color: AppColor.surfaceElevated,
                 child: Icon(
                   Icons.fitness_center,
                   color: AppColor.textPrimary,
-                  size: 24,
+                  size: Responsive.font(context, 24),
                 ),
               ),
             ),
           ),
-          // Details Section
           Expanded(
             child: Padding(
-              padding: EdgeInsets.all(12),
+              padding: EdgeInsets.all(Responsive.width(context, 12)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,19 +69,19 @@ class WorkoutPlanCard extends StatelessWidget {
                     children: [
                       Container(
                         padding: EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 4,
+                          horizontal: Responsive.width(context, 8),
+                          vertical: Responsive.height(context, 4),
                         ),
                         decoration: BoxDecoration(
-                          color: _getLevelColor(
-                            plan.level,
-                          ).withValues(alpha: 0.15),
-                          borderRadius: BorderRadius.circular(6),
+                          color: levelColor.withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(
+                            Responsive.radius(context, 6),
+                          ),
                         ),
                         child: Text(
                           plan.level.toUpperCase(),
                           style: textTheme.labelSmall?.copyWith(
-                            color: _getLevelColor(plan.level),
+                            color: levelColor,
                           ),
                         ),
                       ),
@@ -89,7 +90,7 @@ class WorkoutPlanCard extends StatelessWidget {
                             ? Icons.favorite
                             : Icons.favorite_border,
                         color: AppColor.primary,
-                        size: 20,
+                        size: Responsive.font(context, 20),
                       ),
                     ],
                   ),
@@ -111,10 +112,10 @@ class WorkoutPlanCard extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.access_time,
-                        size: 14,
+                        size: Responsive.font(context, 14),
                         color: AppColor.textSecondary,
                       ),
-                      SizedBox(width: 4),
+                      SizedBox(width: Responsive.width(context, 4)),
                       Text(
                         plan.duration,
                         style: textTheme.labelSmall?.copyWith(
@@ -124,10 +125,10 @@ class WorkoutPlanCard extends StatelessWidget {
                       const SizedBox(width: 16),
                       Icon(
                         Icons.flash_on,
-                        size: 14,
+                        size: Responsive.font(context, 14),
                         color: AppColor.textSecondary,
                       ),
-                      SizedBox(width: 4),
+                      SizedBox(width: Responsive.width(context, 4)),
                       Text(
                         plan.tagExtra,
                         style: textTheme.labelSmall?.copyWith(

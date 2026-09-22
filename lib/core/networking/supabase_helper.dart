@@ -6,20 +6,10 @@ class SupabaseHelper {
       "sb_publishable_OoBJLCNXCFflNCOUUHr3og__FaTZe0i";
 
   static Future<void> init() async {
-    try {
-      await Supabase.initialize(
-        url: projectUrl,
-        publishableKey: publishableKey,
-      );
-    } catch (error, stack) {
-      // Supabase creates its singleton before async auth initialization finishes.
-      // Reset a partial initialization so the failed step can safely retry.
-      try {
-        await Supabase.instance.dispose();
-      } catch (_) {
-        // There may be no initialized singleton to dispose yet.
-      }
-      Error.throwWithStackTrace(error, stack);
-    }
+    await Supabase.initialize(url: projectUrl, publishableKey: publishableKey);
+  }
+
+  Future<dynamic> getData({required String tableName}) async {
+    return await Supabase.instance.client.from(tableName).select();
   }
 }
