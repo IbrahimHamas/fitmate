@@ -1,3 +1,4 @@
+import 'package:fitmate/core/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 
 class ProfileHeader extends StatelessWidget {
@@ -51,7 +52,7 @@ class ProfileHeader extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Text(
-          name.isNotEmpty ? name : 'User Name',
+          name.isNotEmpty ? name : AppStrings.defaultUserName,
           style: const TextStyle(
             color: Colors.white,
             fontSize: 20,
@@ -60,7 +61,7 @@ class ProfileHeader extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          email.isNotEmpty ? email : 'user@email.com',
+          email.isNotEmpty ? email : AppStrings.defaultUserEmail,
           style: const TextStyle(color: Colors.grey, fontSize: 14),
         ),
       ],

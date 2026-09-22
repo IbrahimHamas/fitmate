@@ -132,4 +132,75 @@ abstract final class AppStrings {
   static String requiredField(String field) => '$field is required';
 
   static String requestFailed(Type errorType) => 'Request failed ($errorType).';
+
+  // Shared interface labels and sample plan content.
+  static const String retry = 'Retry';
+  static const String searchWorkouts = 'Search workouts...';
+  static const String featuredWorkoutPlans = 'Featured Workout Plans';
+  static const String seeAll = 'See All';
+  static const String searchByNameOrSpecialty = 'Search by name or specialty';
+  static const String viewProfile = 'View Profile';
+  static const String noTrainersFound = 'No trainers found';
+  static const String beginner = 'Beginner';
+  static const String advanced = 'Advanced';
+  static const String findYourPlan = 'Find Your Plan';
+  static const String alphaStrength = 'Alpha Strength';
+  static const String samplePlanRating = '4.9';
+  static const String eightWeeks = '8 Weeks';
+  static const String sixtyMinutesPerDay = '60 Min/Day';
+  static const String dayOneUppercase = 'DAY 1';
+  static const String dayTwoUppercase = 'DAY 2';
+  static const String dayThree = 'Day 3';
+  static const String pushDayChestAndTriceps = 'Push Day: Chest & Triceps';
+  static const String pullDayBackAndBiceps = 'Pull Day: Back & Biceps';
+  static const String barbellBenchPress = 'Barbell Bench Press';
+  static const String inclineDumbbellFlys = 'Incline Dumbbell Flys';
+  static const String tricepRopePushdowns = 'Tricep Rope Pushdowns';
+  static const String latPulldown = 'Lat Pulldown';
+  static const String barbellRows = 'Barbell Rows';
+  static const String bicepBarbellCurls = 'Bicep Barbell Curls';
+  static const String fourSetsTenReps = '4 sets × 10 reps';
+  static const String threeSetsTwelveReps = '3 sets × 12 reps';
+  static const String fourSetsFifteenReps = '4 sets × 15 reps';
+  static const String threeSetsTenReps = '3 sets × 10 reps';
+  static const String weekOneFoundations = 'Week 1: Foundations';
+  static const String viewAllWeeks = 'View All Weeks';
+  static const String activeRecovery = 'Active Recovery';
+  static const String startWorkoutUppercase = 'START WORKOUT';
+  static const String planDetails = 'Plan Details';
+  static const String ironPulseStrengthPhase = 'IronPulse Strength Phase';
+  static const String strengthPhaseDescription =
+      'A high-intensity program designed for maximum muscle hypertrophy and strengthgains. Focuses on compound movements and progressive overload.';
+  static const String duration = 'Duration';
+  static const String sixtyToNinetyMinutes = '60-90m';
+  static const String frequency = 'Frequency';
+  static const String fiveDaysPerWeek = '5 Days/Wk';
+  static const String intensity = 'Intensity';
+  static const String high = 'High';
+  static const String pleaseSignInToViewYourProfile =
+      'Please sign in to view your profile.';
+  static const String profileTableNotConfigured =
+      'Profile Supabase table is not configured yet.';
+  static const String editProfile = 'Edit Profile';
+  static const String pleaseEnterYourName = 'Please enter your name';
+  static const String phoneNumberLabel = 'Phone Number';
+  static const String saveChanges = 'Save Changes';
+  static const String logOut = 'Log Out';
+  static const String confirmLogOut = 'Are you sure you want to log out?';
+  static const String cancel = 'Cancel';
+  static const String workouts = 'Workouts';
+  static const String calories = 'Calories';
+  static const String sampleCalories = '1,450';
+  static const String timeHours = 'Time (hrs)';
+  static const String settings = 'Settings';
+  static const String defaultUserName = 'User Name';
+  static const String defaultUserEmail = 'user@email.com';
+
+  static String yearsExperience(int years) => '$years yrs exp';
+
+  static String clientsCount(int count) => '$count+ clients';
+
+  static String failedToSave(String error) => 'Failed to save: $error';
+
+  static String noRouteDefined(String? route) => 'No route defined for $route';
 }

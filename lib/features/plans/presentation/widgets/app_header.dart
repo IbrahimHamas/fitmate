@@ -1,3 +1,4 @@
+import 'package:fitmate/core/constants/app_strings.dart';
 import 'dart:ui';
 
 import 'package:fitmate/core/themes/app_color.dart';
@@ -29,13 +30,13 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
           ),
           child: Row(
             children: [
-              Image.asset("assets/images/flash.png", width: 20, height: 25),
+              const Icon(Icons.bolt_rounded, size: 25, color: AppColor.primary),
               SizedBox(width: 8),
               SizedBox(
                 width: 119.13,
                 height: 28,
                 child: Text(
-                  "IronPulse".toUpperCase(),
+                  AppStrings.appName.toUpperCase(),
                   textAlign: TextAlign.center,
                   style: AppTheme.darkTheme.textTheme.titleLarge!.copyWith(
                     letterSpacing: -0.5,
@@ -46,11 +47,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
               Stack(
                 clipBehavior: Clip.none,
                 children: [
-                  Image.asset(
-                    "assets/images/notification.png",
-                    width: 16,
-                    height: 20,
-                  ),
+                  const Icon(Icons.notifications_none_rounded, size: 20),
 
                   Positioned(
                     top: -1,

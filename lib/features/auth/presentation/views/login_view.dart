@@ -45,7 +45,10 @@ class _LoginViewState extends State<LoginView> {
       } else if (state is LoginSuccess) {
         Navigator.of(context, rootNavigator: true).pop();
         context.showSuccessSnackBar(state.message);
-        // Navigator.pushReplacementNamed(context, AppRoute.mainHome);
+        Navigator.of(context).pushNamedAndRemoveUntil(
+          Routes.home,
+          (route) => false,
+        );
       } else if (state is LoginFailure) {
         Navigator.of(context, rootNavigator: true).pop();
         context.showErrorSnackBar(state.errorMessage);

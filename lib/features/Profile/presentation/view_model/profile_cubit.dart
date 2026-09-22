@@ -1,3 +1,4 @@
+import 'package:fitmate/core/constants/app_strings.dart';
 import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fitmate/features/profile/data/models/profile_model.dart';
@@ -28,7 +29,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       );
       emit(ProfileSuccess(updatedProfile));
     } catch (e) {
-      emit(ProfileError('Failed to save: ${e.toString()}'));
+      emit(ProfileError(AppStrings.failedToSave(e.toString())));
     }
   }
 }

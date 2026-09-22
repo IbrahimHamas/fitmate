@@ -1,3 +1,7 @@
+import 'package:fitmate/core/constants/app_strings.dart';
+import 'package:fitmate/core/dependency_injection/injection_container.dart';
+import 'package:fitmate/features/auth/presentation/view_model/auth_cubit.dart';
+import 'package:fitmate/features/auth/presentation/view_model/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,33 +18,80 @@ import 'package:fitmate/features/profile/presentation/view/widgets/profile_stat_
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
-  void _showLogoutDialog(BuildContext context) {
-    showDialog(
+  Future<void> _showLogoutDialog(BuildContext context) async {
+    final loggedOut = await showDialog<bool>(
       context: context,
-      builder: (dialogContext) => AlertDialog(
-        backgroundColor: AppColor.surfaceElevated,
-        title: const Text(
-          'Log Out',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      barrierDismissible: false,
+      builder: (_) => BlocProvider(
+        create: (_) => sl<AuthCubit>(),
+        child: BlocConsumer<AuthCubit, AuthState>(
+          listener: (dialogContext, state) {
+            if (state is SignOutSuccess) {
+              Navigator.of(dialogContext).pop(true);
+            }
+          },
+          builder: (dialogContext, state) {
+            final isLoading = state is SignOutLoading;
+            return PopScope(
+              canPop: !isLoading,
+              child: AlertDialog(
+                backgroundColor: AppColor.surfaceElevated,
+                title: const Text(
+                  AppStrings.logOut,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      AppStrings.confirmLogOut,
+                      style: TextStyle(color: Colors.white70),
+                    ),
+                    if (isLoading) ...[
+                      const SizedBox(height: 16),
+                      const CircularProgressIndicator(),
+                    ],
+                    if (state is SignOutFailure) ...[
+                      const SizedBox(height: 16),
+                      Text(
+                        state.errorMessage,
+                        style: const TextStyle(color: Colors.red),
+                      ),
+                    ],
+                  ],
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: isLoading
+                        ? null
+                        : () => Navigator.pop(dialogContext),
+                    child: const Text(
+                      AppStrings.cancel,
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: isLoading
+                        ? null
+                        : () => dialogContext.read<AuthCubit>().signOut(),
+                    child: const Text(
+                      AppStrings.logOut,
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
-        content: const Text(
-          'Are you sure you want to log out?',
-          style: TextStyle(color: Colors.white70),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: const Text('Cancel', style: TextStyle(color: Colors.grey)),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(dialogContext);
-            },
-            child: const Text('Log Out', style: TextStyle(color: Colors.red)),
-          ),
-        ],
       ),
     );
+    if (loggedOut != true || !context.mounted) return;
+    context.showSuccessSnackBar(AppStrings.loggedOutSuccessfully);
+    Navigator.of(context).pushNamedAndRemoveUntil(Routes.login, (_) => false);
   }
 
   @override
@@ -58,7 +109,7 @@ class ProfileScreen extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Profile'),
+            title: const Text(AppStrings.profile),
             centerTitle: true,
             elevation: 0,
           ),
@@ -84,7 +135,7 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ProfileStatCard(
-                        title: 'Workouts',
+                        title: AppStrings.workouts,
                         value: '${currentProfile?.plansCompleted ?? 12}',
                         label: '',
                       ),
@@ -92,15 +143,15 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(width: 8),
                     const Expanded(
                       child: ProfileStatCard(
-                        title: 'Calories',
-                        value: '1,450',
+                        title: AppStrings.calories,
+                        value: AppStrings.sampleCalories,
                         label: '',
                       ),
                     ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: ProfileStatCard(
-                        title: 'Time (hrs)',
+                        title: AppStrings.timeHours,
                         value: '${currentProfile?.workoutHours ?? 8.5}',
                         label: '',
                       ),
@@ -110,7 +161,7 @@ class ProfileScreen extends StatelessWidget {
                 const SizedBox(height: 32),
                 ProfileMenuItem(
                   icon: Icons.person_outline,
-                  title: 'Edit Profile',
+                  title: AppStrings.editProfile,
                   onTap: () {
                     Navigator.pushNamed(
                       context,
@@ -121,12 +172,12 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 ProfileMenuItem(
                   icon: Icons.settings_outlined,
-                  title: 'Settings',
+                  title: AppStrings.settings,
                   onTap: () {},
                 ),
                 ProfileMenuItem(
                   icon: Icons.logout_rounded,
-                  title: 'Log Out',
+                  title: AppStrings.logOut,
                   isLogout: true,
                   onTap: () => _showLogoutDialog(context),
                 ),
