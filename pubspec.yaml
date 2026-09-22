@@ -1,6 +1,7 @@
 name: fitmate
 description: "A new Flutter project."
 
+
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -8,14 +9,17 @@ version: 1.0.0+1
 environment:
   sdk: ">=3.10.4 <4.0.0"
 
+
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
   supabase_flutter: ^2.17.2
+  shared_preferences: ^2.5.5
   get_it: ^9.2.1
   flutter_bloc: ^9.1.1
   dartz: ^0.10.1
+
   equatable: ^3.0.0
   image_picker: ^1.2.3
   shared_preferences: ^2.5.5
@@ -41,4 +45,5 @@ flutter:
   fonts:
     - family: Lexend
       fonts:
+
         - asset: assets/fonts/Lexend-Variable.ttf
