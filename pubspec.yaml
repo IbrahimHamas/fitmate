@@ -35,9 +35,11 @@ flutter:
 
   assets:
     - assets/fonts/Lexend-OFL.txt
+
     - assets/images/splash/
     - assets/images/welcome/
     - assets/images/plans/
+    - assets/images/trainers/
     - assets/svgs/
 
   fonts:
