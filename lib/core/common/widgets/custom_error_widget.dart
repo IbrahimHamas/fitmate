@@ -1,3 +1,4 @@
+import 'package:fitmate/core/constants/app_strings.dart';
 import 'package:fitmate/core/common/responsive/responsive.dart';
 import 'package:fitmate/core/themes/app_color.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,10 @@ class CustomErrorWidget extends StatelessWidget {
               ),
             ),
             SizedBox(height: Responsive.height(context, 14)),
-            ElevatedButton(onPressed: onPressed, child: const Text('Retry')),
+            ElevatedButton(
+              onPressed: onPressed,
+              child: const Text(AppStrings.retry),
+            ),
           ],
         ),
       ),

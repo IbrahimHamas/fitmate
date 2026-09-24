@@ -1,3 +1,5 @@
+import 'package:fitmate/core/constants/app_image.dart';
+import 'package:fitmate/core/constants/app_strings.dart';
 import 'dart:ui';
 
 import 'package:fitmate/core/themes/app_color.dart';
@@ -33,7 +35,7 @@ class PlanCard extends StatelessWidget {
                   child: AspectRatio(
                     aspectRatio: 1.6,
                     child: Image.asset(
-                      "assets/images/alpha-strength.png",
+                      AppImage.alphaStrength,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -46,7 +48,7 @@ class PlanCard extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Alpha Strength",
+                          AppStrings.alphaStrength,
                           style: textTheme.titleLarge,
                         ),
                       ),
@@ -60,7 +62,7 @@ class PlanCard extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerRight,
                         child: Text(
-                          "4.9",
+                          AppStrings.samplePlanRating,
                           style: textTheme.labelMedium!.copyWith(
                             fontWeight: FontWeight.w700,
                           ),
@@ -81,7 +83,7 @@ class PlanCard extends StatelessWidget {
                       ),
                       SizedBox(width: 4),
                       Text(
-                        "8 Weeks",
+                        AppStrings.eightWeeks,
                         style: textTheme.labelMedium!.copyWith(
                           fontWeight: FontWeight.w400,
                           color: AppColor.textSecondary,
@@ -95,7 +97,7 @@ class PlanCard extends StatelessWidget {
                       ),
                       SizedBox(width: 4),
                       Text(
-                        "60 Min/Day",
+                        AppStrings.sixtyMinutesPerDay,
                         style: textTheme.labelMedium!.copyWith(
                           fontWeight: FontWeight.w400,
                           color: AppColor.textSecondary,
@@ -122,7 +124,7 @@ class PlanCard extends StatelessWidget {
                   color: Color(0xE50D7FF2),
                 ),
                 child: Text(
-                  "Advanced".toUpperCase(),
+                  AppStrings.advanced.toUpperCase(),
                   textAlign: TextAlign.center,
                   style: textTheme.headlineSmall!.copyWith(
                     fontSize: 12,

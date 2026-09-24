@@ -1,4 +1,5 @@
 import 'package:fitmate/core/routing/app_router.dart';
+
 import 'package:fitmate/core/routing/navigator_key.dart' show NavigatorKey;
 import 'package:fitmate/core/themes/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class FitApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
       navigatorKey: NavigatorKey.navigatorKey,
+
       onGenerateRoute: appRouter.generateRoute,
       initialRoute: initialRoute,
     );

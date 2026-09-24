@@ -1,3 +1,4 @@
+import 'package:fitmate/core/constants/app_strings.dart';
 import 'package:fitmate/core/themes/app_color.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,7 @@ class RestDayCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "Day 3".toUpperCase(),
+                    AppStrings.dayThree.toUpperCase(),
                     textHeightBehavior: TextHeightBehavior(
                       leadingDistribution: TextLeadingDistribution.even,
                     ),
@@ -43,7 +44,7 @@ class RestDayCard extends StatelessWidget {
                   ),
                   SizedBox(height: 0.5),
                   Text(
-                    "Active Recovery",
+                    AppStrings.activeRecovery,
                     textHeightBehavior: TextHeightBehavior(
                       leadingDistribution: TextLeadingDistribution.even,
                     ),

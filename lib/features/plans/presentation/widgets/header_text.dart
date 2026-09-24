@@ -1,3 +1,4 @@
+import 'package:fitmate/core/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 
 class HeaderText extends StatelessWidget {
@@ -10,7 +11,7 @@ class HeaderText extends StatelessWidget {
       width: double.infinity,
       alignment: Alignment.centerLeft,
       child: Text(
-        "Find Your Plan",
+        AppStrings.findYourPlan,
 
         style: textTheme.headlineMedium!.copyWith(fontSize: 30, height: 1.2),
       ),

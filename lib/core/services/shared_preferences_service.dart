@@ -1,4 +1,5 @@
 import 'package:fitmate/core/constants/shared_preferences_keys.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesService {

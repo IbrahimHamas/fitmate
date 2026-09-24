@@ -1,9 +1,7 @@
-import 'package:fitmate/core/themes/app_color.dart';
-import 'package:fitmate/core/themes/app_theme.dart';
+import 'package:fitmate/core/constants/app_strings.dart';
 import 'package:fitmate/features/plan_details/data/models/exercise_model.dart';
 import 'package:fitmate/features/plan_details/data/models/workout_day_model.dart';
 import 'package:fitmate/features/plan_details/presentation/widgets/expandable_day_card.dart';
-import 'package:fitmate/features/plan_details/presentation/widgets/info_badge.dart';
 import 'package:fitmate/features/plan_details/presentation/widgets/plan_details_header.dart';
 import 'package:fitmate/features/plan_details/presentation/widgets/plan_hero_image.dart';
 import 'package:fitmate/features/plan_details/presentation/widgets/plan_intro_section.dart';
@@ -11,7 +9,6 @@ import 'package:fitmate/features/plan_details/presentation/widgets/plan_stats_ro
 import 'package:fitmate/features/plan_details/presentation/widgets/rest_day_card.dart';
 import 'package:fitmate/features/plan_details/presentation/widgets/section_header.dart';
 import 'package:fitmate/features/plan_details/presentation/widgets/start_workout_button.dart';
-import 'package:fitmate/features/plan_details/presentation/widgets/stats_card.dart';
 import 'package:flutter/material.dart';
 
 class PlanDetails extends StatelessWidget {
@@ -19,34 +16,40 @@ class PlanDetails extends StatelessWidget {
 
   final List<WorkoutDayModel> workoutDays = const [
     WorkoutDayModel(
-      dayTitle: 'DAY 1',
-      mainTitle: 'Push Day: Chest & Triceps',
+      dayTitle: AppStrings.dayOneUppercase,
+      mainTitle: AppStrings.pushDayChestAndTriceps,
       isInitiallyExpanded: true,
       exercises: [
         ExerciseModel(
-          title: 'Barbell Bench Press',
-          subtitle: '4 sets × 10 reps',
+          title: AppStrings.barbellBenchPress,
+          subtitle: AppStrings.fourSetsTenReps,
         ),
         ExerciseModel(
-          title: 'Incline Dumbbell Flys',
-          subtitle: '3 sets × 12 reps',
+          title: AppStrings.inclineDumbbellFlys,
+          subtitle: AppStrings.threeSetsTwelveReps,
         ),
         ExerciseModel(
-          title: 'Tricep Rope Pushdowns',
-          subtitle: '4 sets × 15 reps',
+          title: AppStrings.tricepRopePushdowns,
+          subtitle: AppStrings.fourSetsFifteenReps,
         ),
       ],
     ),
     WorkoutDayModel(
-      dayTitle: 'DAY 2',
-      mainTitle: 'Pull Day: Back & Biceps',
+      dayTitle: AppStrings.dayTwoUppercase,
+      mainTitle: AppStrings.pullDayBackAndBiceps,
       isInitiallyExpanded: false,
       exercises: [
-        ExerciseModel(title: 'Lat Pulldown', subtitle: '4 sets × 10 reps'),
-        ExerciseModel(title: 'Barbell Rows', subtitle: '3 sets × 10 reps'),
         ExerciseModel(
-          title: 'Bicep Barbell Curls',
-          subtitle: '3 sets × 12 reps',
+          title: AppStrings.latPulldown,
+          subtitle: AppStrings.fourSetsTenReps,
+        ),
+        ExerciseModel(
+          title: AppStrings.barbellRows,
+          subtitle: AppStrings.threeSetsTenReps,
+        ),
+        ExerciseModel(
+          title: AppStrings.bicepBarbellCurls,
+          subtitle: AppStrings.threeSetsTwelveReps,
         ),
       ],
     ),
@@ -73,8 +76,8 @@ class PlanDetails extends StatelessWidget {
                 PlanStatsRow(),
                 SizedBox(height: 16),
                 SectionHeader(
-                  title: "Week 1: Foundations",
-                  actionText: "View All Weeks",
+                  title: AppStrings.weekOneFoundations,
+                  actionText: AppStrings.viewAllWeeks,
                 ),
                 SizedBox(height: 16),
                 Padding(
@@ -92,9 +95,12 @@ class PlanDetails extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 16),
-                RestDayCard(dayLabel: 'Day 3', title: 'Active Recovery'),
+                RestDayCard(
+                  dayLabel: AppStrings.dayThree,
+                  title: AppStrings.activeRecovery,
+                ),
                 SizedBox(height: 16),
-                StartWorkoutButton(title: "START WORKOUT"),
+                StartWorkoutButton(title: AppStrings.startWorkoutUppercase),
               ],
             ),
           ),

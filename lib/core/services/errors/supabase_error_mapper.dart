@@ -1,6 +1,5 @@
 import 'package:fitmate/core/constants/app_strings.dart';
 import 'dart:async';
-
 import 'package:fitmate/core/services/errors/failure.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -15,8 +14,7 @@ abstract final class SupabaseErrorMapper {
     'weak_password': AppStrings.pleaseChooseAStrongerPassword,
     'same_password':
         AppStrings.pleaseChooseAPasswordDifferentFromYourCurrentOne,
-    'otp_expired':
-        AppStrings.theVerificationLinkOrCodeHasExpiredRequestANewOne,
+    'otp_expired': AppStrings.theVerificationLinkOrCodeHasExpiredRequestANewOne,
     'session_not_found': AppStrings.pleaseSignInAgainToContinue,
     'session_expired': AppStrings.yourSessionHasExpiredPleaseSignInAgain,
     'refresh_token_not_found': AppStrings.pleaseSignInAgainToContinue,
@@ -129,7 +127,8 @@ abstract final class SupabaseErrorMapper {
         return AppStrings.tooManyRequestsPleaseTryAgainLater;
       default:
         if (statusCode != null && statusCode >= 500 && statusCode < 600) {
-          return AppStrings.theServiceIsTemporarilyUnavailablePleaseTryAgainLater;
+          return AppStrings
+              .theServiceIsTemporarilyUnavailablePleaseTryAgainLater;
         }
         return fallback;
     }
