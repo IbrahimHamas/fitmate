@@ -1,4 +1,3 @@
-
 import 'package:fitmate/core/dependency_injection/injection_container.dart';
 import 'package:fitmate/core/features/MainHome/data/models/navigation_item_model.dart';
 import 'package:fitmate/core/features/MainHome/presentation/view_model/main_home_cubit.dart';
@@ -12,15 +11,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class MainHomeView extends StatelessWidget {
-  const MainHomeView({super.key});
+   MainHomeView({super.key});
 
-  static final List<NavigationItemModel> _items = [
+    final List<NavigationItemModel> _items = [
     NavigationItemModel(
       label: 'Home',
       icon: SvgAssetLoader('assets/svgs/home.svg'),
       selectedIcon: SvgAssetLoader('assets/svgs/home.svg'),
       page: BlocProvider<WorkoutPlansCubit>(
-        create: (_) => sl<WorkoutPlansCubit>(),
+        create: (_) => sl<WorkoutPlansCubit>()..fetchWorkoutPlans(),
         child: const WorkoutPlansView(),
       ),
     ),
@@ -29,7 +28,7 @@ class MainHomeView extends StatelessWidget {
       icon: SvgAssetLoader('assets/svgs/trainers_icon.svg'),
       selectedIcon: SvgAssetLoader('assets/svgs/trainers_icon.svg'),
       page: BlocProvider<TrainersCubit>(
-        create: (_) => sl<TrainersCubit>(),
+        create: (_) => sl<TrainersCubit>()..fetchTrainers(),
         child: const TrainersView(),
       ),
     ),

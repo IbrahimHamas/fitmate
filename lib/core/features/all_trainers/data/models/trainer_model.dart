@@ -21,9 +21,9 @@ class TrainerModel {
     return TrainerModel(
       id: json['id']?.toString() ?? '',
       name: json['name']?.toString() ?? '',
-      specialty: json['specialty']?.toString() ?? '',
+      specialty: json['specialist']?.toString() ?? '',
       rating: _toDouble(json['rating']),
-      yearsExp: _toInt(json['years_exp']),
+      yearsExp: _toInt(json['experience_years']),
       clientsCount: _toInt(json['clients_count']),
       imageUrl: json['image_url']?.toString() ?? '',
     );

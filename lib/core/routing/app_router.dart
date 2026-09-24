@@ -83,27 +83,27 @@ class AppRouter {
           ),
         );
         */
-          case Routes.home:
+      case Routes.home:
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => BlocProvider(
             create: (_) => MainHomeCubit(),
-            child: const MainHomeView(),
+            child:  MainHomeView(),
           ),
         );
-        case Routes.workoutPlans:
+      case Routes.workoutPlans:
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => BlocProvider(
-  create: (_) => sl<WorkoutPlansCubit>(),
-  child: const WorkoutPlansView(),
-)
+          builder: (_) => BlocProvider<WorkoutPlansCubit>(
+            create: (_) => sl<WorkoutPlansCubit>()..fetchWorkoutPlans(),
+            child: const WorkoutPlansView(),
+          ),
         );
-  case Routes.trainers:
+      case Routes.trainers:
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => BlocProvider(
-            create: (_) => sl<TrainersCubit>(),
+          builder: (_) => BlocProvider<TrainersCubit>(
+            create: (_) => sl<TrainersCubit>()..fetchTrainers(),
             child: const TrainersView(),
           ),
         );

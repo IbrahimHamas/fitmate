@@ -14,6 +14,6 @@ Future<void> main() async {
 
   await initDependencies();
 
-  runApp(FitApp(appRouter: AppRouter(), initialRoute: Routes.welcome));
+  runApp(FitApp(appRouter: AppRouter(), initialRoute: Routes.home));
   FlutterNativeSplash.remove();
 }

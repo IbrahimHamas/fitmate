@@ -36,6 +36,7 @@ flutter:
     - assets/images/splash/native_artwork.png
     - assets/images/splash/native_logo_android12.png
     - assets/images/welcome/runner.jpg
+    - assets/svgs/
 
   fonts:
     - family: Lexend

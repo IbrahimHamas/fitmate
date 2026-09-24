@@ -10,6 +10,6 @@ class WorkoutPlansRepository {
 
   WorkoutPlansRepository(this._remoteDataSource);
 
-  Future<Either<Failure, List<WorkoutPlanModel>>> getWorkoutPlans() =>
+  Future<Either<Failure, List<WorkOutPlansModel>>> getWorkoutPlans() =>
       requestHandler(_remoteDataSource.getWorkoutPlans);
 }

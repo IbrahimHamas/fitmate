@@ -4,7 +4,7 @@ import 'package:fitmate/core/themes/app_color.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutPlanCard extends StatelessWidget {
-  final WorkoutPlanModel plan;
+  final WorkOutPlansModel plan;
 
   const WorkoutPlanCard({super.key, required this.plan});
 
@@ -117,7 +117,7 @@ class WorkoutPlanCard extends StatelessWidget {
                       ),
                       SizedBox(width: Responsive.width(context, 4)),
                       Text(
-                        plan.duration,
+                        "${plan.duration}",
                         style: textTheme.labelSmall?.copyWith(
                           color: AppColor.textSecondary,
                         ),

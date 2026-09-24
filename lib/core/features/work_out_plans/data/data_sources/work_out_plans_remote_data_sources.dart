@@ -6,11 +6,11 @@ class WorkoutPlansRemoteDataSource {
 
   final SupabaseClient _supabaseClient;
 
-  Future<List<WorkoutPlanModel>> getWorkoutPlans() async {
+  Future<List<WorkOutPlansModel>> getWorkoutPlans() async {
     final response = await _supabaseClient.from('workout_plans').select();
 
     return (response as List)
-        .map((plan) => WorkoutPlanModel.fromJson(plan))
+        .map((plan) => WorkOutPlansModel.fromJson(plan))
         .toList();
   }
 }

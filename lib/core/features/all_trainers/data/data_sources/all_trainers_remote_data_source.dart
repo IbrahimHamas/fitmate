@@ -8,7 +8,7 @@ class AllTrainersRemoteDataSource {
   final SupabaseHelper _supabaseHelper;
 
   Future<List<TrainerModel>> getTrainers() async {
-    final response = await _supabaseHelper.getData(tableName: 'trainers');
+    final response = await _supabaseHelper.getData(tableName: 'all_trainers');
 
     return (response as List)
         .map(

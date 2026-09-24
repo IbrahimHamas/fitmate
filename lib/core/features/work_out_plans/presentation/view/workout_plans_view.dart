@@ -17,7 +17,6 @@ class _WorkoutPlansViewState extends State<WorkoutPlansView> {
   @override
   void initState() {
     super.initState();
-    context.read<WorkoutPlansCubit>().fetchWorkoutPlans();
   }
 
   @override
@@ -82,15 +81,20 @@ class _WorkoutPlansViewState extends State<WorkoutPlansView> {
                 ],
               ),
               SizedBox(height: Responsive.height(context, 8)),
-              // Plans List
               Expanded(
                 child: BlocBuilder<WorkoutPlansCubit, WorkoutPlansState>(
                   builder: (context, state) {
-                    if (state is WorkoutPlansLoading) {
+                    if (state is WorkoutPlansLoading ||
+                        state is WorkoutPlansInitial) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (state is WorkoutPlansError) {
                       return Center(child: Text(state.message));
                     } else if (state is WorkoutPlansSuccess) {
+                      if (state.plans.isEmpty) {
+                        return const Center(
+                          child: Text('No workout plans found'),
+                        );
+                      }
                       return ListView.builder(
                         itemCount: state.plans.length,
                         itemBuilder: (context, index) {
@@ -98,7 +102,7 @@ class _WorkoutPlansViewState extends State<WorkoutPlansView> {
                         },
                       );
                     }
-                    return const SizedBox.shrink();
+                    return const Center(child: CircularProgressIndicator());
                   },
                 ),
               ),

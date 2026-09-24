@@ -8,7 +8,7 @@ class WorkoutPlansInitial extends WorkoutPlansState {}
 class WorkoutPlansLoading extends WorkoutPlansState {}
 
 class WorkoutPlansSuccess extends WorkoutPlansState {
-  final List<WorkoutPlanModel> plans;
+  final List<WorkOutPlansModel> plans;
   WorkoutPlansSuccess(this.plans);
 }
 
